@@ -1,0 +1,58 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html{
+  font-family: 'Montserrat', sans-serif;
+}
+body{
+  background: #e2e2e2;
+}
+li {
+  list-style: none;
+  padding: 0;
+}
+.text_area{
+  resize: none;
+  height: 150px;
+  width: 100%;
+  padding: 10px;
+}
+.btn,
+button,
+input {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+img {
+  object-fit: cover;
+}
+
+.link_class {
+  text-decoration: none;
+  color: inherit;
+}
+
+.App {
+  width: 100vw;
+  min-height: 100vh;
+  background: white;
+
+}
+
+.App .main {
+  max-width: 80vw;
+  width: 100%;
+  min-height: 100vh;
+  margin: auto;
+  /* background-color: #eee; */
+}
+
+/* IMPORT STYLES */
+@import url("./loading.css");
+@import url("./header.css");
