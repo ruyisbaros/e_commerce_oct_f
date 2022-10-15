@@ -53,6 +53,22 @@ img {
   /* background-color: #eee; */
 }
 
+.icon_white{
+  color:white;
+}
+.icon_silver{
+  color:silver;
+}
+.icon_green{
+  color:green;
+}
+.icon_red{
+  color:red;
+}
+.icon_dark{
+  color:gray;
+}
+
 /* IMPORT STYLES */
 @import url("./loading.css");
 @import url("./header.css");

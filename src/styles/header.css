@@ -1,5 +1,66 @@
-.header{
-    width: 100%;
-    height: 120px;
-    background-color: #ccc;
+.header {
+  width: 100%;
+  height: 100px;
+  background-color: #ccc;
+}
+/* UP */
+.header_up {
+  display: flex;
+  align-items: center;
+  height: 60%;
+  background: #131921;
+  color: #eee;
+  padding: 0 2rem;
+}
+
+.gr_icon path{
+    stroke: #fff;
+}
+
+.header_up .logo,
+.header_up .adress,
+.header_up .shop-card,
+.header_up .auth-box {
+  flex: 1;
+}
+
+.header_up .search-box {
+  flex: 5;
+  background: #fff;
+}
+
+.header_up .search-contents {
+  display: flex;
+}
+
+.header_up .adress {
+  display: flex;
+  align-items: center;
+  margin-left: -8rem;
+}
+.header_up .adress .adress_text {
+  margin-left: 7px;
+}
+.adress_text .hello1 {
+  margin-top: 15px;
+  color: #ccc;
+  font-size: 14px;
+}
+.adress_text .hello2 {
+    margin-top: -18px;
   }
+
+.header .logo {
+}
+.header .logo .logo_img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* DOWN */
+
+.header_down {
+  height: 40%;
+  background: #232f3e;
+}
