@@ -4,6 +4,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { GrLocation } from "react-icons/gr";
 import { FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
+
 const Header = () => {
   return (
     <div className="header">
@@ -24,21 +25,35 @@ const Header = () => {
           <div className="search-contents">
             <input type="text" />
             <div className="search-contents-icon">
-              <AiOutlineSearch />
+              <AiOutlineSearch size={20} />
             </div>
           </div>
         </div>
         <div className="shop-card">
-          <FiShoppingCart />
+          <Link to="/card" className="link_class">
+            <FiShoppingCart size={30} />
+          </Link>
           <span>2</span>
         </div>
         <div className="auth-box">
           <Link to="/login" className="link_class">
             Sign In
           </Link>
+          <Link to="/register" className="link_class">
+            Sign Up
+          </Link>
         </div>
       </div>
-      <div className="header_down"></div>
+      <div className="header_down">
+        <ul className="down_list">
+          <li>Best Sellers</li>
+          <li>Basics</li>
+          <li>Firsatlar</li>
+          <li>Categories</li>
+          <li>Customer Service</li>
+          <li>Careers</li>
+        </ul>
+      </div>
     </div>
   );
 };

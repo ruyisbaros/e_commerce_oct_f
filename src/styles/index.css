@@ -72,3 +72,5 @@ img {
 /* IMPORT STYLES */
 @import url("./loading.css");
 @import url("./header.css");
+@import url("./login.css");
+@import url("./register.css");
