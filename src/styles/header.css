@@ -1,5 +1,9 @@
 .header {
   width: 100%;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
   height: 100px;
   color: #eee;
 }
@@ -12,8 +16,8 @@
   padding: 0 2rem;
 }
 
-.gr_icon path{
-    stroke: #fff;
+.gr_icon path {
+  stroke: #fff;
 }
 
 .header_up .logo,
@@ -37,8 +41,8 @@
   font-size: 14px;
 }
 .adress_text .hello2 {
-    margin-top: -18px;
-  }
+  margin-top: -18px;
+}
 
 .header .logo {
 }
@@ -49,49 +53,49 @@
 }
 
 .header_up .search-box {
-    flex: 5;
-    background: #fff;
-    border:0.5px solid transparent;
-    border-radius: 5px;
-  }
-  
-  .header_up .search-contents {
-    
-    display: flex;
-   
-  }
+  flex: 5;
+  background: #fff;
+  border: 0.5px solid transparent;
+  border-radius: 5px;
+}
 
-  .search-contents input{
-    width: 95%;
-    padding: 7px 5px;
-    border: none;
-    outline: none;
-  }
+.header_up .search-contents {
+  display: flex;
+}
 
-  .search-contents-icon{
-    width: 5%;
-    background: #febd69;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
+.search-contents input {
+  width: 95%;
+  padding: 7px 5px;
+  border: none;
+  outline: none;
+}
 
-  .header_up .shop-card{
-    margin-left: 3rem;
-    position: relative;
-  }
+.search-contents-icon {
+  width: 5%;
+  background: #febd69;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
 
-  .header_up .shop-card span{
-    position: absolute;
-    top: -15px;
-    left: 13px;
-  }
+.header_up .shop-card {
+  margin-left: 3rem;
+  position: relative;
+}
 
-  .header_up .auth-box{
-    display: flex;
-    gap:1rem
-  }
+.header_up .shop-card span {
+  position: absolute;
+  top: -15px;
+  left: 13px;
+  color: #febd69;
+  font-weight: bold;
+}
+
+.header_up .auth-box {
+  display: flex;
+  gap: 1rem;
+}
 
 /* DOWN */
 
@@ -100,9 +104,9 @@
   background: #232f3e;
 }
 
-.header_down .down_list{
-    height: 100%;
-    display: flex;
-    align-items: center;
-    gap:1rem;
+.header_down .down_list {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }

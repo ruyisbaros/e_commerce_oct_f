@@ -1,0 +1,119 @@
+.register {
+  margin-top: 8rem;
+  max-width: 100vw;
+  max-height: 80vh;
+}
+
+.register_sorround {
+  width: 40%;
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register_sorround .register_img {
+  width: 100px;
+  display: inline-block;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+
+.register .register_form {
+  width: 60%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 2px #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+}
+
+.register .register_form h2 {
+  margin: 1rem 0;
+}
+
+.register .register_form .pass_box {
+  position: relative;
+  width: 80%;
+}
+.register .register_form .pass_box input {
+  width: 100%;
+  margin: 0 auto;
+}
+.register .register_form .pass_box small {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.register .register_form input {
+  width: 80%;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  border: 0.5px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+.register_form_btns {
+  margin: 2rem 0;
+  display: flex;
+  gap: 2rem;
+}
+
+/* Form end */
+
+.forward_register {
+  width: 60%;
+}
+
+.forward_register_line {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.forward_register_line .forward_line {
+  border-bottom: 1px solid #ccc;
+  flex: 1;
+}
+.forward_register_line .forward_text {
+  flex: 1.5;
+  text-align: center;
+  width: fit-content;
+  margin-top: 2px;
+}
+
+.btn-create {
+  display: block;
+  width: 100%;
+  margin: 1rem auto;
+}
+/* #3b5998 */
+
+/* .oauth_register_btns .btn {
+  display: block;
+  width: 100%;
+  margin: 10px auto;
+  color: #fff;
+} */
+
+/* .oauth_register_btns .google_btn {
+  background-color: #db4437;
+}
+.oauth_register_btns .facebbok_btn {
+  background-color: #3b5998;
+}
+
+.oauth_register_btns .facebbok_btn:hover {
+  background-color: #324e8d;
+  color: #fff;
+}
+
+.oauth_register_btns .google_btn:hover {
+  background-color: #cf4033;
+  color: #fff;
+} */
