@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import logoImg from "../assets/logo-main.png";
+import { BsImageFill } from "react-icons/bs";
+import loadingGif from "../assets/loading.gif";
+import defaultImage from "../assets/default-user.png";
+import axios from "axios";
 
 const Register = () => {
   const [signUpUser, setSignUpUser] = useState({
@@ -9,17 +13,82 @@ const Register = () => {
     lastName: "",
     email: "",
     password: "",
+    confPassword: "",
     imageId: "pw4gq42vstslcyqzi81o",
     roles: ["User"],
   });
-  const { firstName, lastName, imageId, email, password } = signUpUser;
+  const { firstName, lastName, imageId, email, confPassword, password } =
+    signUpUser;
   const [passType, setPassType] = useState(false);
+  const [confPassType, setConfPassType] = useState(false);
+  const [isCreated, setIsCreated] = useState(false);
 
   const handleInput = (e) => {
     setSignUpUser({ ...signUpUser, [e.target.name]: e.target.value });
   };
 
   console.log(signUpUser);
+
+  //Profile image settings start
+  const [selectedFile, setSelectedFile] = useState("");
+  const [preview, setPreview] = useState("");
+
+  useEffect(() => {
+    if (!selectedFile) {
+      setPreview(undefined);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(selectedFile);
+    setPreview(objectUrl);
+
+    // free memory when ever this component is unmounted
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [selectedFile]);
+
+  const [selectedImageId, setSelectedImageId] = useState("");
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    setIsCreated(true);
+
+    if (!file) return alert("Please select an image");
+    if (file.size > 1024 * 1024 * 1) {
+      alert("Your file is too large (max 1mb allowed)");
+      setSelectedFile("");
+      return;
+    }
+    if (file.type !== "image/jpeg" && file.type !== "image/png") {
+      alert("Only jpeg, jpg or PNG images are allowed");
+      setSelectedFile("");
+      return;
+    }
+
+    try {
+      setSelectedFile(file);
+      let formData = new FormData();
+      formData.append("multipartFile", file);
+
+      const { data } = await axios.post("/api/v1/images/upload", formData);
+      setIsCreated(false);
+      console.log(data);
+      setSelectedImageId(data.imageId);
+      setSignUpUser({ ...signUpUser, imageId: data.imageId });
+    } catch (error) {
+      setIsCreated(false);
+      toast.error(error.response.data.message);
+    }
+  };
+
+  const deleteImage = async () => {
+    setSelectedFile("");
+    const { data } = await axios.delete(
+      `/api/v1/images/delete/${selectedImageId}`
+      /* { headers: { Authorization: `Bearer ${token}` } } */
+    );
+    setSignUpUser({ ...signUpUser, imageId: "pw4gq42vstslcyqzi81o" });
+    console.log(data);
+  };
 
   const handleSubmit = async (e) => {};
 
@@ -35,9 +104,25 @@ const Register = () => {
           <h2>Sign up</h2>
           <input
             required
+            name="firstName"
+            type="text"
+            placeholder="Your first name"
+            value={firstName}
+            onChange={handleInput}
+          />
+          <input
+            required
+            name="lastName"
+            type="text"
+            placeholder="Your last Name"
+            value={lastName}
+            onChange={handleInput}
+          />
+          <input
+            required
             name="email"
             type="email"
-            placeholder="Type your email"
+            placeholder="Your email"
             value={email}
             onChange={handleInput}
           />
@@ -46,7 +131,7 @@ const Register = () => {
               name="password"
               required
               type={passType ? "text" : "password"}
-              placeholder="Type your password"
+              placeholder="Your password"
               value={password}
               onChange={handleInput}
             />
@@ -57,9 +142,56 @@ const Register = () => {
               {passType ? "Hide" : "Show"}
             </small>
           </div>
+          <div className="conf_pass_box">
+            <input
+              name="confPassword"
+              required
+              type={confPassType ? "text" : "password"}
+              placeholder="Re Type your password"
+              value={confPassword}
+              onChange={handleInput}
+            />
+            <small
+              style={{ color: confPassType ? "red" : "teal" }}
+              onClick={() => setConfPassType(!confPassType)}
+            >
+              {confPassType ? "Hide" : "Show"}
+            </small>
+          </div>
+          <div className="upload_image">
+            <label htmlFor="imageUpload">
+              <p>Profile image:</p>
+              {isCreated ? (
+                <img
+                  className="loading_gif"
+                  src={loadingGif}
+                  alt="profile avatar"
+                />
+              ) : (
+                <img
+                  className="uploaded_image"
+                  src={preview ? preview : defaultImage}
+                  alt="profile avatar"
+                />
+              )}
+            </label>
+            {preview && (
+              <span onClick={deleteImage} className="delete_image">
+                X
+              </span>
+            )}
+            <input
+              id="imageUpload"
+              type="file"
+              maxLength={1024 * 1024}
+              accept="image/png/* , image/jpeg/*"
+              //value={newUser.photos}
+              onChange={handleImageUpload}
+            />
+          </div>
           <div className="register_form_btns">
             <button type="submit" className="btn btn-primary">
-              Sign In
+              Sign Up
             </button>
             <button
               onClick={handleCancel}
