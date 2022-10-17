@@ -78,6 +78,10 @@ img {
   color: gray;
 }
 
+.rating span {
+  color: #ffc000;
+}
+
 /* IMPORT STYLES */
 @import url("./loading.css");
 @import url("./header.css");

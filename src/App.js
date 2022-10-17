@@ -24,6 +24,8 @@ import Products from "./components/adminPanel/Products";
 import AddCategory from "./components/adminPanel/AddCategory";
 import AddProduct from "./components/adminPanel/AddProduct";
 import AdminHome from "./adminPages/AdminHome";
+import SubProducts from "./components/adminPanel/SubProducts";
+import EditCategory from "./components/adminPanel/EditCategory";
 
 function App() {
   const { logging } = useSelector((store) => store.currentUser);
@@ -61,9 +63,12 @@ function App() {
             <Route
               path="/"
               element={
-                token &&
-                currentUser.roles.map((r) => r.roleName).includes("Admin") ? (
-                  <AdminHome />
+                token ? (
+                  currentUser.roles.map((r) => r.roleName).includes("Admin") ? (
+                    <AdminHome />
+                  ) : (
+                    <Home />
+                  )
                 ) : (
                   <Home />
                 )
@@ -75,7 +80,12 @@ function App() {
             <Route path="/card" element={<ShopCard />} />
             <Route path="/admin/categories" element={<Categories />} />
             <Route path="/admin/products" element={<Products />} />
+            <Route path="/admin/sub_products" element={<SubProducts />} />
             <Route path="/admin/categories/add" element={<AddCategory />} />
+            <Route
+              path="/admin/categories/update/:id"
+              element={<EditCategory />}
+            />
             <Route path="/admin/products/add" element={<AddProduct />} />
 
             <Route path="*" element={<NotFound />} />

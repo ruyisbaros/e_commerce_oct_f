@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import logoImg from "../../assets/logo-main-cr.png";
 import { AiOutlineSearch, AiOutlineCaretDown } from "react-icons/ai";
 import { GrLocation } from "react-icons/gr";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const AdminHeader = ({ token }) => {
+  const navigate = useNavigate();
   const [logoutShow, setLogoutShow] = useState(false);
 
   const [loggedInUser, setLoggedInUser] = useState(
@@ -17,6 +18,7 @@ const AdminHeader = ({ token }) => {
     localStorage.removeItem("currentUser");
     window.location.reload();
     setLogoutShow(false);
+    navigate("/");
   };
 
   return (

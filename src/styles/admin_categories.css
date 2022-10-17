@@ -1,0 +1,25 @@
+.admin_categories {
+  /* background-color: #ccc; */
+}
+
+.admin_categories .category_sorround {
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.category_sorround .single_category {
+  width: 20%;
+  height: 400px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+.single_category img {
+  width: 100%;
+  height: 50%;
+}
+
+.sub_go {
+  margin-top: 1rem;
+}
