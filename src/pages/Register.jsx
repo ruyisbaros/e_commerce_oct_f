@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import logoImg from "../assets/logo-main.png";
 import { BsImageFill } from "react-icons/bs";
 import loadingGif from "../assets/loading.gif";
 import defaultImage from "../assets/default-user.png";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import {
+  userLoggedFinish,
+  userLoggedStart,
+  userLoggedSucces,
+} from "../redux/loggedUserSlicer";
+
+import { AiOutlineGoogle } from "react-icons/ai";
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [signUpUser, setSignUpUser] = useState({
     firstName: "",
     lastName: "",
@@ -17,7 +28,7 @@ const Register = () => {
     imageId: "pw4gq42vstslcyqzi81o",
     roles: ["User"],
   });
-  const { firstName, lastName, imageId, email, confPassword, password } =
+  const { firstName, lastName, imageId, email, confPassword, password, roles } =
     signUpUser;
   const [passType, setPassType] = useState(false);
   const [confPassType, setConfPassType] = useState(false);
@@ -87,10 +98,46 @@ const Register = () => {
       /* { headers: { Authorization: `Bearer ${token}` } } */
     );
     setSignUpUser({ ...signUpUser, imageId: "pw4gq42vstslcyqzi81o" });
-    console.log(data);
+    //console.log(data);
   };
 
-  const handleSubmit = async (e) => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (confPassword === password) {
+      try {
+        dispatch(userLoggedStart());
+        const { data } = await axios.post("/api/v1/auth/register", {
+          firstName,
+          lastName,
+          imageId,
+          email,
+          password,
+          roles,
+        });
+        console.log(data);
+        dispatch(userLoggedFinish());
+        dispatch(
+          userLoggedSucces({
+            email: data[0].email,
+            firstName: data[0].firstName,
+            profileImage: data[0].image.imageUrl,
+            token: data[1],
+          })
+        );
+        localStorage.setItem("token", data[1]);
+
+        localStorage.setItem("currentUser", JSON.stringify(data[0]));
+        /* toast.success("Welcome to e-commer page"); */
+        navigate("/");
+        window.location.reload();
+      } catch (error) {
+        dispatch(userLoggedFinish());
+        toast.error(error.response.data.message);
+      }
+    } else {
+      toast.error("Passwords do not match");
+    }
+  };
 
   const handleCancel = () => {
     setSignUpUser({ ...signUpUser, email: "", password: "" });
@@ -200,6 +247,15 @@ const Register = () => {
             >
               Cancel
             </button>
+          </div>
+          <div className="oauth_login_btns">
+            <button className="btn google_btn">
+              <AiOutlineGoogle size={20} /> Register With Google
+            </button>
+            {/*  <button className="btn facebbok_btn">
+              <FaFacebookF size={20} />
+              Login With Facebook
+            </button> */}
           </div>
         </form>
         <div className="forward_register">

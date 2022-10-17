@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from "react";
-import logoImg from "../assets/logo-main-cr.png";
+import React, { useState } from "react";
+import logoImg from "../../assets/logo-main-cr.png";
 import { AiOutlineSearch, AiOutlineCaretDown } from "react-icons/ai";
 import { GrLocation } from "react-icons/gr";
-import { FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
-const Header = ({ token }) => {
-  const [loggedInUser, setLoggedInUser] = useState({});
+const AdminHeader = ({ token }) => {
   const [logoutShow, setLogoutShow] = useState(false);
 
-  useEffect(() => {
-    if (localStorage.getItem("currentUser")) {
-      setLoggedInUser(JSON.parse(localStorage.getItem("currentUser")));
-    }
-  }, []);
+  const [loggedInUser, setLoggedInUser] = useState(
+    JSON.parse(localStorage.getItem("currentUser"))
+  );
+  const { id, email, firstName, image } = loggedInUser;
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -45,20 +42,14 @@ const Header = ({ token }) => {
             </div>
           </div>
         </div>
-        <div className="shop-card">
-          <Link to="/card" className="link_class">
-            <FiShoppingCart size={30} />
-          </Link>
-          <span>2</span>
+        <div className="admin_dash">
+          <h3>Admin Control Panel</h3>
         </div>
+
         {token ? (
           <div className="logged_user_info">
-            <img
-              src={loggedInUser.image.imageUrl}
-              alt=""
-              className="logged_user_img"
-            />
-            <span>{loggedInUser.firstName}</span>
+            <img src={image.imageUrl} alt="" className="logged_user_img" />
+            <span>{firstName}</span>
             <span
               onClick={() => setLogoutShow(!logoutShow)}
               className="down_icon"
@@ -84,16 +75,20 @@ const Header = ({ token }) => {
       </div>
       <div className="header_down">
         <ul className="down_list">
-          <li>Best Sellers</li>
-          <li>Basics</li>
-          <li>Firsatlar</li>
+          <Link to="/admin/categories" className="link_class">
+            <li>Categories</li>
+          </Link>
+          <Link to="/admin/products" className="link_class">
+            <li>Products</li>
+          </Link>
+          {/*  <li>Discounts</li>
           <li>Categories</li>
           <li>Customer Service</li>
-          <li>Careers</li>
+          <li>Careers</li> */}
         </ul>
       </div>
     </div>
   );
 };
 
-export default Header;
+export default AdminHeader;

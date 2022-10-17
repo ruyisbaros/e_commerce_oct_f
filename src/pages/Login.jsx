@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import logoImg from "../assets/logo-main.png";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { FaFacebookF } from "react-icons/fa";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [loggedUser, setLoggedUser] = useState({ email: "", password: "" });
   const { email, password } = loggedUser;
   const [passType, setPassType] = useState(false);
@@ -15,7 +16,7 @@ const Login = () => {
     setLoggedUser({ ...loggedUser, [e.target.name]: e.target.value });
   };
 
-  console.log(loggedUser);
+  //console.log(loggedUser);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,8 +24,12 @@ const Login = () => {
       const { data } = await axios.post("/api/v1/auth/login", {
         ...loggedUser,
       });
-      console.log(data);
-      toast.success("You are in");
+      //console.log(data);
+      localStorage.setItem("token", data[0]);
+      localStorage.setItem("currentUser", JSON.stringify(data[1]));
+      /* toast.success("You are in"); */
+      navigate("/");
+      window.location.reload();
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -80,13 +85,15 @@ const Login = () => {
             <button className="btn google_btn">
               <AiOutlineGoogle size={20} /> Login With Google
             </button>
-            <button className="btn facebbok_btn">
+            {/*  <button className="btn facebbok_btn">
               <FaFacebookF size={20} />
               Login With Facebook
-            </button>
+            </button> */}
           </div>
           <div className="forgot_password">
-            <p className="forgot">Forgot Password?</p>
+            <Link to="/forgot_password" className="link_class">
+              <p className="forgot">Forgot Password?</p>
+            </Link>
           </div>
         </form>
         <div className="forward_register">

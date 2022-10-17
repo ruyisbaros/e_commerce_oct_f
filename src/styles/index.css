@@ -42,7 +42,7 @@ img {
 .link_class:hover {
   text-decoration: none;
   color: inherit;
-  font-weight: bold;
+  letter-spacing: 0.5px;
 }
 
 .App {
@@ -53,10 +53,12 @@ img {
 }
 
 .App .main {
+  /* background-color: #ccc; */
   max-width: 80vw;
   width: 100%;
   min-height: 100vh;
   margin: auto;
+  margin-top: 8rem;
   /* background-color: #eee; */
 }
 
@@ -81,3 +83,8 @@ img {
 @import url("./header.css");
 @import url("./login.css");
 @import url("./register.css");
+@import url("./forgot_password.css");
+@import url("./admin_home.css");
+@import url("./admin_categories.css");
+@import url("./admin_products.css");
+@import url("./admin_add_category.css");

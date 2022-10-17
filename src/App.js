@@ -13,19 +13,72 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ShopCard from "./pages/ShopCard";
+import ForgotPassword from "./pages/ForgotPassword.jsx";
+import { useSelector } from "react-redux";
+import Loading from "./utils/Loading.jsx";
+import { useEffect, useState } from "react";
+import AdminHeader from "./components/adminPanel/AdminHeader";
+import NotFound from "./pages/NotFound";
+import Categories from "./components/adminPanel/Categories";
+import Products from "./components/adminPanel/Products";
+import AddCategory from "./components/adminPanel/AddCategory";
+import AddProduct from "./components/adminPanel/AddProduct";
+import AdminHome from "./adminPages/AdminHome";
 
 function App() {
+  const { logging } = useSelector((store) => store.currentUser);
+
+  const [token, setToken] = useState("");
+  const [currentUser, setCurrentUser] = useState({});
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+    }
+    if (localStorage.getItem("currentUser")) {
+      setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
+    }
+  }, [token]);
+
+  console.log(token, currentUser);
+
   return (
     <BrowserRouter>
       <ToastContainer position="bottom-center" limit={1} />
+      {logging && <Loading />}
       <div className="App">
-        <Header />
+        {token ? (
+          currentUser.roles.map((r) => r.roleName).includes("Admin") ? (
+            <AdminHeader token={token} />
+          ) : (
+            <Header token={token} />
+          )
+        ) : (
+          <Header token={token} />
+        )}
         <div className="main">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route
+              path="/"
+              element={
+                token &&
+                currentUser.roles.map((r) => r.roleName).includes("Admin") ? (
+                  <AdminHome />
+                ) : (
+                  <Home />
+                )
+              }
+            />
             <Route path="/login" element={<Login />} />
+            <Route path="/forgot_password" element={<ForgotPassword />} />
             <Route path="/register" element={<Register />} />
             <Route path="/card" element={<ShopCard />} />
+            <Route path="/admin/categories" element={<Categories />} />
+            <Route path="/admin/products" element={<Products />} />
+            <Route path="/admin/categories/add" element={<AddCategory />} />
+            <Route path="/admin/products/add" element={<AddProduct />} />
+
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </div>
