@@ -1,6 +1,6 @@
 .add_product {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   margin-bottom: 2rem;
   /* background-color: #ccc; */
 }
@@ -80,7 +80,7 @@
 }
 
 .show_images {
-  max-height: 450px;
+  max-height: 500px;
   width: 80%;
   border: 1px solid #ccc;
   padding-left: 1rem;

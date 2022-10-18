@@ -9,5 +9,8 @@
   min-height: 100vh;
   padding: 1rem;
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 1rem;
 }

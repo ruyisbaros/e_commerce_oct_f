@@ -58,7 +58,10 @@ const Rating = ({ rating, numReviews }) => {
           }
         ></i>
       </span>
-      {/*  <span> {numReviews} reviews</span> */}
+      <span style={{ color: "#ccc", fontSize: "12px" }}>
+        {" "}
+        {numReviews} reviews
+      </span>
     </div>
   );
 };

@@ -1,0 +1,59 @@
+.single_product {
+  width: 20%;
+  height: 650px;
+  padding: 1rem;
+  background-color: #fff;
+}
+
+.product_img img {
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+}
+.product_info .product_name {
+  font-weight: bold;
+  margin-top: 5px;
+}
+.product_info .deal {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+}
+.product_info .deal .perc {
+  background-color: #cc0c39;
+  color: #fff;
+  font-size: 14px;
+  padding: 5px;
+}
+
+.product_info .deal .deal_text {
+  color: #cc0c39;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.product_info .price_info {
+  position: relative;
+  width: max-content;
+}
+
+.product_info .price_info .euro {
+  font-size: 12px;
+  position: absolute;
+  top: 5px;
+  left: -10px;
+}
+.product_info .price_info .zero {
+  font-size: 12px;
+  position: absolute;
+  top: 5px;
+  right: -15px;
+}
+
+.product_info .delivery {
+  font-size: 14px;
+  color: green;
+  text-decoration: underline;
+  cursor: pointer;
+}
