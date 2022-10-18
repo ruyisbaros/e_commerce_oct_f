@@ -26,6 +26,7 @@ import AddProduct from "./components/adminPanel/AddProduct";
 import AdminHome from "./adminPages/AdminHome";
 import SubProducts from "./components/adminPanel/SubProducts";
 import EditCategory from "./components/adminPanel/EditCategory";
+import Footer from "./components/Footer";
 
 function App() {
   const { logging } = useSelector((store) => store.currentUser);
@@ -91,6 +92,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
+        <Footer />
       </div>
     </BrowserRouter>
   );

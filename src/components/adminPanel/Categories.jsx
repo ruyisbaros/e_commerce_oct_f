@@ -24,9 +24,9 @@ const Categories = () => {
   return (
     <div className="admin_categories">
       <div className="action_btns">
-        <button className="btn btn-primary">
+        <button style={{ background: "teal" }} className="btn btn-primary">
           <Link to="/admin/categories/add" className="link_class">
-            Create Category
+            Create New Category
           </Link>
         </button>
       </div>
