@@ -9,7 +9,7 @@ const Categories = () => {
 
   const fetchCategories = async () => {
     try {
-      const { data } = await axios.get("/api/v1/categories/all");
+      const { data } = await axios.get("/api/v1/categories/user/all");
       console.log(data);
       setCategories(data);
     } catch (error) {

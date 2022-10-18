@@ -3,9 +3,10 @@ import logoImg from "../assets/logo-main-cr.png";
 import { AiOutlineSearch, AiOutlineCaretDown } from "react-icons/ai";
 import { GrLocation } from "react-icons/gr";
 import { FiShoppingCart } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = ({ token }) => {
+  const navigate = useNavigate();
   const [loggedInUser, setLoggedInUser] = useState({});
   const [logoutShow, setLogoutShow] = useState(false);
 
@@ -18,6 +19,7 @@ const Header = ({ token }) => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("currentUser");
+    navigate("/");
     window.location.reload();
     setLogoutShow(false);
   };

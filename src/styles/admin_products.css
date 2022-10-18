@@ -6,7 +6,7 @@
 .products_main .product_main_sorround {
   background-color: rgb(233, 228, 228);
   width: 100%;
-  min-height: 100vh;
+  /* overflow: scroll; */
   padding: 1rem;
   display: flex;
   flex-wrap: wrap;

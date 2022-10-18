@@ -52,3 +52,12 @@
 .sub_go {
   margin-top: 1rem;
 }
+
+@media (max-width: 1300px) {
+  .category_sorround .single_category {
+    width: 35%;
+  }
+  .admin_categories .category_sorround {
+    justify-content: center;
+  }
+}

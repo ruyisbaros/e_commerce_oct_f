@@ -19,14 +19,15 @@ import Loading from "./utils/Loading.jsx";
 import { useEffect, useState } from "react";
 import AdminHeader from "./components/adminPanel/AdminHeader";
 import NotFound from "./pages/NotFound";
-import Categories from "./components/adminPanel/Categories";
-import Products from "./components/adminPanel/Products";
+import Categories from "./components/Categories";
+import Products from "./components/Products";
 import AddCategory from "./components/adminPanel/AddCategory";
 import AddProduct from "./components/adminPanel/AddProduct";
 import AdminHome from "./adminPages/AdminHome";
-import SubProducts from "./components/adminPanel/SubProducts";
+import SubProducts from "./components/SubProducts";
 import EditCategory from "./components/adminPanel/EditCategory";
 import Footer from "./components/Footer";
+import EditProduct from "./components/adminPanel/EditProduct";
 
 function App() {
   const { logging } = useSelector((store) => store.currentUser);
@@ -80,12 +81,19 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/card" element={<ShopCard />} />
             <Route path="/admin/categories" element={<Categories />} />
-            <Route path="/admin/products" element={<Products />} />
+            <Route
+              path="/products"
+              element={<Products currentUser={currentUser} token={token} />}
+            />
             <Route path="/admin/sub_products" element={<SubProducts />} />
             <Route path="/admin/categories/add" element={<AddCategory />} />
             <Route
               path="/admin/categories/update/:id"
               element={<EditCategory />}
+            />
+            <Route
+              path="/admin/products/update/:id"
+              element={<EditProduct />}
             />
             <Route path="/admin/products/add" element={<AddProduct />} />
 

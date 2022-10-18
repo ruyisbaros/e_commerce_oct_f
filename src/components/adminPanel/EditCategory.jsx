@@ -106,11 +106,14 @@ const EditCategory = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put(`/api/v1/categories/update/${id}`, {
-        categoryName,
-        description,
-        imageId,
-      });
+      const { data } = await axios.put(
+        `/api/v1/categories/admin/update/${id}`,
+        {
+          categoryName,
+          description,
+          imageId,
+        }
+      );
       console.log(data);
       navigate("/admin/categories");
     } catch (error) {

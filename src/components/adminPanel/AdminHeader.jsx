@@ -16,9 +16,10 @@ const AdminHeader = ({ token }) => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("currentUser");
-    window.location.reload();
+
     setLogoutShow(false);
     navigate("/");
+    window.location.reload();
   };
 
   return (
@@ -80,7 +81,7 @@ const AdminHeader = ({ token }) => {
           <Link to="/admin/categories" className="link_class">
             <li>Categories</li>
           </Link>
-          <Link to="/admin/products" className="link_class">
+          <Link to="/products" className="link_class">
             <li>Products</li>
           </Link>
           {/*  <li>Discounts</li>

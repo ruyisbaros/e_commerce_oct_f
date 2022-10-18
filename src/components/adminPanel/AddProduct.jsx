@@ -37,7 +37,7 @@ const AddProduct = () => {
   }, [index, images]);
   const fetchCategories = async () => {
     try {
-      const { data } = await axios.get("/api/v1/categories/all");
+      const { data } = await axios.get("/api/v1/categories/user/all");
       console.log(data);
       setCategories(data);
     } catch (error) {
@@ -127,7 +127,7 @@ const AddProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/products/create", {
+      const { data } = await axios.post("/api/v1/products/admin/create", {
         ...newProduct,
       });
       console.log(data);

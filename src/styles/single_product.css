@@ -1,8 +1,9 @@
 .single_product {
   width: 20%;
-  height: 650px;
+  min-height: 650px;
   padding: 1rem;
   background-color: #fff;
+  position: relative;
 }
 
 .product_img img {
@@ -56,4 +57,36 @@
   color: green;
   text-decoration: underline;
   cursor: pointer;
+}
+
+/* More actions */
+
+.single_product .more_action {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+.single_product .action_box {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  width: 100px;
+  height: 60px;
+  padding: 5px 0;
+  background-color: rgb(235, 231, 231);
+}
+.single_product .action_box p {
+  cursor: pointer;
+}
+.single_product .action_box p:hover {
+  background-color: #ccc;
+}
+.single_product .action_box .delete {
+  margin-top: -15px;
+}
+
+@media (max-width: 1300px) {
+  .single_product {
+    width: 30%;
+  }
 }
