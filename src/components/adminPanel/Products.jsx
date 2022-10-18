@@ -28,7 +28,7 @@ const Products = () => {
           </Link>
         </button>
       </div>
-      <div className="product_sorround">
+      <div className="product_main_sorround">
         {products?.map((p) => (
           <Product key={p.id} {...p} />
         ))}

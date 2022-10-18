@@ -52,7 +52,7 @@ const AddProduct = () => {
   const handleInput = (e) => {
     setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
   };
-  console.log(newProduct);
+
   //Profile image settings start
   const [selectedFile, setSelectedFile] = useState("");
   const [preview, setPreview] = useState("");
@@ -79,12 +79,20 @@ const AddProduct = () => {
           headers: { "content-type": "multipart/form-data", authorization: token }
       } */
     );
-    console.log(data);
+    //console.log(data);
     newImages.push(data);
-
     setImages([...images, ...newImages]);
   };
+  useEffect(() => {
+    setNewProduct({
+      ...newProduct,
+      productImages: images.map((i) => i.imageId),
+    });
+  }, [images]);
+  console.log(newProduct);
   //console.log(images);
+  //console.log(images);
+
   const handleImages = async (e) => {
     const files = [...e.target.files];
 
@@ -116,11 +124,23 @@ const AddProduct = () => {
     //console.log(data);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post("/api/v1/products/create", {
+        ...newProduct,
+      });
+      console.log(data);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
   return (
     <div className="add_product">
       <div className="add_product_sorround">
         <h2 className="text-center my-3">Create a New Product</h2>
-        <form className="add_product_form">
+        <form onSubmit={handleSubmit} className="add_product_form">
           <input
             type="text"
             placeholder="Product Name"
@@ -165,7 +185,7 @@ const AddProduct = () => {
           />
           <div className="cats_contents">
             {categories?.map((cat) => (
-              <div className="cats">
+              <div key={cat.id} className="cats">
                 <label htmlFor="categoryName">{cat.categoryName}</label>
                 <input
                   value={cat.categoryName}
@@ -177,44 +197,57 @@ const AddProduct = () => {
             ))}
           </div>
           <div className="show_images">
-            {isCreated && (
-              <img src={loadingImg} alt="loading" className="d-block mx-auto" />
-            )}
-            <div className="sml_img_box">
-              {images.map((img, i) => (
-                <div key={i} id="file_img" className="file_img">
-                  <img
-                    src={img?.imageUrl}
-                    alt="images"
-                    onClick={() =>
-                      setIndex(i)
-                    } /* className={i = index && "active_img"} */
-                  />
-                  <span onClick={() => deleteImage(i)} className="times">
-                    &times;
-                  </span>
-                </div>
-              ))}
-              {/* Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi est quos recusandae dolorum facere enim eaque, quasi modi voluptatibus possimus. */}
-            </div>
-            {images.length > 0 && (
-              <div className="img_big_box">
-                <img src={activeImg?.url} alt="" />
+            <div className="input_images">
+              <div className="file_upload">
+                <i className="fas fa-image"></i>
+                <input
+                  type="file"
+                  name="file"
+                  id="file"
+                  multiple
+                  accept="image/*,video/*"
+                  onChange={handleImages}
+                />
               </div>
-            )}
-          </div>
-          <div className="input_images">
-            <div className="file_upload">
-              <i className="fas fa-image"></i>
-              <input
-                type="file"
-                name="file"
-                id="file"
-                multiple
-                accept="image/*,video/*"
-                onChange={handleImages}
-              />
             </div>
+            <div className="show_images_box">
+              {isCreated && (
+                <img
+                  src={loadingImg}
+                  alt="loading"
+                  className="d-block mx-auto"
+                />
+              )}
+              <div className="sml_img_box">
+                {images.map((img, i) => (
+                  <div
+                    key={i}
+                    id="file_img"
+                    className={index === i ? "file_img active_img" : "file_img"}
+                  >
+                    <img
+                      src={img?.imageUrl}
+                      alt="images"
+                      onClick={() =>
+                        setIndex(i)
+                      } /* className={i = index && "active_img"} */
+                    />
+                    <span onClick={() => deleteImage(i)} className="times">
+                      &times;
+                    </span>
+                  </div>
+                ))}
+                {/* Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi est quos recusandae dolorum facere enim eaque, quasi modi voluptatibus possimus. */}
+              </div>
+              {images.length > 0 && (
+                <div className="img_big_box">
+                  <img src={activeImg?.imageUrl} alt="" />
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="product_submit">
+            <button className="btn btn-primary">Submit</button>
           </div>
         </form>
       </div>

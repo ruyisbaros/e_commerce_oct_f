@@ -1,0 +1,13 @@
+.products_main {
+  min-height: 100vh;
+  margin-bottom: 2rem;
+}
+
+.products_main .product_main_sorround {
+  background-color: rgb(233, 228, 228);
+  width: 100%;
+  min-height: 100vh;
+  padding: 1rem;
+  display: flex;
+  gap: 10px;
+}
