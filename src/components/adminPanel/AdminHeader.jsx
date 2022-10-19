@@ -84,6 +84,9 @@ const AdminHeader = ({ token }) => {
           <Link to="/products" className="link_class">
             <li>Products</li>
           </Link>
+          <Link to="/admin/users" className="link_class">
+            <li>Users</li>
+          </Link>
           {/*  <li>Discounts</li>
           <li>Categories</li>
           <li>Customer Service</li>

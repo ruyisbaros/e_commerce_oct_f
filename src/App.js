@@ -28,6 +28,8 @@ import SubProducts from "./components/SubProducts";
 import EditCategory from "./components/adminPanel/EditCategory";
 import Footer from "./components/Footer";
 import EditProduct from "./components/adminPanel/EditProduct";
+import Users from "./components/adminPanel/Users";
+import EditUser from "./components/adminPanel/EditUser";
 
 function App() {
   const { logging } = useSelector((store) => store.currentUser);
@@ -96,6 +98,11 @@ function App() {
               element={<EditProduct />}
             />
             <Route path="/admin/products/add" element={<AddProduct />} />
+            <Route path="/admin/users" element={<Users />} />
+            <Route
+              path="/admin/update_user/:id"
+              element={<EditUser token={token} />}
+            />
 
             <Route path="*" element={<NotFound />} />
           </Routes>

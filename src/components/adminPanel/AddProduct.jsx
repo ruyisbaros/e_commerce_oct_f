@@ -131,7 +131,7 @@ const AddProduct = () => {
         ...newProduct,
       });
       console.log(data);
-      navigate("/admin/products");
+      navigate("/products");
     } catch (error) {
       toast.error(error.response.data.message);
     }
