@@ -31,6 +31,8 @@ import EditProduct from "./components/adminPanel/EditProduct";
 import Users from "./components/adminPanel/Users";
 import EditUser from "./components/adminPanel/EditUser";
 
+import "react-app-polyfill/stable";
+
 function App() {
   const { logging } = useSelector((store) => store.currentUser);
 

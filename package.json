@@ -2,7 +2,7 @@
   "name": "e_commerce_oct_front",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://my-ecom-back.herokuapp.com/",
+  "proxy": "https://my-ecom-back.herokuapp.com",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -17,6 +17,7 @@
     "http-proxy-middleware": "^2.0.6",
     "moment": "^2.29.4",
     "react": "^18.2.0",
+    "react-app-polyfill": "^3.0.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
     "react-redux": "^8.0.4",
@@ -48,6 +49,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "now-build":"react-scripts build && mv build dist"
+  }
 }
