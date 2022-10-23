@@ -2,7 +2,7 @@
   "name": "e_commerce_oct_front",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://my-ecom-back.herokuapp.com",
+  "proxy": "https://my-ecom-back.herokuapp.com/",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -48,5 +48,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "now-build":"react-scripts build && mv build dist"
 }
