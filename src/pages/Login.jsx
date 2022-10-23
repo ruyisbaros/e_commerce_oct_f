@@ -21,9 +21,12 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/auth/login", {
-        ...loggedUser,
-      });
+      const { data } = await axios.post(
+        "https://spontaneous-smakager-7d40b4.netlify.app/api/v1/auth/login",
+        {
+          ...loggedUser,
+        }
+      );
       //console.log(data);
       localStorage.setItem("token", data[0]);
       localStorage.setItem("currentUser", JSON.stringify(data[1]));
