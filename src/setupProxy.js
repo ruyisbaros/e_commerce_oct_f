@@ -1,4 +1,4 @@
-import { createProxyMiddleware } from "http-proxy-middleware";
+/* import { createProxyMiddleware } from "http-proxy-middleware";
 
 module.exports = function (app) {
   app.use(
@@ -6,4 +6,4 @@ module.exports = function (app) {
       target: "http://localhost:8090",
     })
   );
-};
+}; */
