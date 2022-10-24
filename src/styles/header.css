@@ -150,9 +150,6 @@
   font-size: 18px;
   transition: all 0.4s;
 }
-.header_down .down_list li:hover {
-  background: #fff;
-}
 
 .nav_menu.active {
   right: 0;

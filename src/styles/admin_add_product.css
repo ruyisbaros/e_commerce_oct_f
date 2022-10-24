@@ -172,13 +172,15 @@
 }
 @media (max-width: 500px) {
   .add_product .add_product_form {
-    width: 90%;
+    width: 100%;
   }
-
+  .cats_contents {
+    width: 95%;
+  }
   .add_product_form input {
-    width: 80%;
+    width: 95%;
   }
   .add_product_form textarea {
-    width: 80%;
+    width: 95%;
   }
 }

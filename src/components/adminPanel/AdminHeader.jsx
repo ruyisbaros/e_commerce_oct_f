@@ -3,9 +3,11 @@ import logoImg from "../../assets/logo-main-cr.png";
 import { AiOutlineSearch, AiOutlineCaretDown } from "react-icons/ai";
 import { GrLocation } from "react-icons/gr";
 import { Link, useNavigate } from "react-router-dom";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const AdminHeader = ({ token }) => {
   const navigate = useNavigate();
+  const [isNavSeen, setIsNavSeen] = useState(false);
   const [logoutShow, setLogoutShow] = useState(false);
 
   const [loggedInUser, setLoggedInUser] = useState(
@@ -75,16 +77,35 @@ const AdminHeader = ({ token }) => {
             </Link>
           </div>
         )}
+        <div className="hamburger" onClick={() => setIsNavSeen(!isNavSeen)}>
+          {isNavSeen ? (
+            <FaTimes size={20} style={{ color: "white" }} />
+          ) : (
+            <FaBars size={20} style={{ color: "white" }} />
+          )}
+        </div>
       </div>
-      <div className="header_down">
+      <div className={isNavSeen ? "header_down active" : "header_down"}>
         <ul className="down_list">
-          <Link to="/admin/categories" className="link_class">
+          <Link
+            onClick={() => setIsNavSeen(false)}
+            to="/admin/categories"
+            className="link_class"
+          >
             <li>Categories</li>
           </Link>
-          <Link to="/products" className="link_class">
+          <Link
+            onClick={() => setIsNavSeen(false)}
+            to="/products"
+            className="link_class"
+          >
             <li>Products</li>
           </Link>
-          <Link to="/admin/users" className="link_class">
+          <Link
+            onClick={() => setIsNavSeen(false)}
+            to="/admin/users"
+            className="link_class"
+          >
             <li>Users</li>
           </Link>
           {/*  <li>Discounts</li>
