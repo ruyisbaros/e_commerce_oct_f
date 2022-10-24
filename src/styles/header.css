@@ -178,16 +178,26 @@
     border: none;
     outline: none;
   }
+  @media (max-width: 800px) {
+    /* .header_up .adress,
+    .header_up .auth-box {
+      flex: 2;
+    } */
+    .header_up {
+      height: 75%;
+    }
+  }
   @media (max-width: 500px) {
     .header_up .adress {
-      display: none;
-    }
-    .header_up .search-box {
       display: none;
     }
     .header_up .auth-box {
       flex: 1.2;
     }
+    .header_up .search-box {
+      display: none;
+    }
+
     .hamburger {
       visibility: visible;
     }
