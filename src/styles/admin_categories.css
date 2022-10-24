@@ -61,3 +61,21 @@
     justify-content: center;
   }
 }
+@media (max-width: 800px) {
+  .category_sorround .single_category {
+    width: 35%;
+  }
+  .admin_categories .category_sorround {
+    justify-content: center;
+  }
+}
+@media (max-width: 500px) {
+  .category_sorround .single_category {
+    width: 85%;
+  }
+  .admin_categories .category_sorround {
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -1,7 +1,7 @@
 .add_category {
   width: 100%;
   /* background-color: #ccc; */
-  height: 80vh;
+  min-height: 80vh;
 }
 
 .add_category_sorround {
@@ -82,4 +82,17 @@
   justify-content: center;
   cursor: pointer;
   z-index: 3;
+}
+
+@media (max-width: 900px) {
+  .add_category_sorround form {
+    width: 80%;
+  }
+
+  .add_category_sorround form input {
+    width: 90%;
+  }
+  .add_category_sorround > h2 {
+    font-size: 20px;
+  }
 }

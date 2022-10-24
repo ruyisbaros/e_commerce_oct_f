@@ -158,3 +158,27 @@
     width: 80%;
   }
 }
+@media (max-width: 900px) {
+  .add_product .add_product_form {
+    width: 80%;
+  }
+
+  .add_product_form input {
+    width: 80%;
+  }
+  .add_product_form textarea {
+    width: 80%;
+  }
+}
+@media (max-width: 500px) {
+  .add_product .add_product_form {
+    width: 90%;
+  }
+
+  .add_product_form input {
+    width: 80%;
+  }
+  .add_product_form textarea {
+    width: 80%;
+  }
+}

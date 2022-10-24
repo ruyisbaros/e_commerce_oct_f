@@ -131,8 +131,16 @@
     width: 60%;
   }
 }
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .login_sorround {
     width: 80%;
+  }
+}
+@media (max-width: 500px) {
+  .login_sorround {
+    width: 90%;
+  }
+  .login .login_form {
+    width: 90%;
   }
 }

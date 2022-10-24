@@ -90,3 +90,13 @@
     width: 30%;
   }
 }
+@media (max-width: 800px) {
+  .single_product {
+    width: 30%;
+  }
+}
+@media (max-width: 500px) {
+  .single_product {
+    width: 90%;
+  }
+}

@@ -14,3 +14,10 @@
   gap: 30px;
   margin-top: 1rem;
 }
+
+@media (max-width: 500px) {
+  .products_main .product_main_sorround {
+    flex-direction: column;
+    align-items: center;
+  }
+}

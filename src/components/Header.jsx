@@ -4,9 +4,11 @@ import { AiOutlineSearch, AiOutlineCaretDown } from "react-icons/ai";
 import { GrLocation } from "react-icons/gr";
 import { FiShoppingCart } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const Header = ({ token }) => {
   const navigate = useNavigate();
+  const [isNavSeen, setIsNavSeen] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState({});
   const [logoutShow, setLogoutShow] = useState(false);
 
@@ -83,8 +85,15 @@ const Header = ({ token }) => {
             </Link>
           </div>
         )}
+        <div className="hamburger" onClick={() => setIsNavSeen(!isNavSeen)}>
+          {isNavSeen ? (
+            <FaTimes size={20} style={{ color: "white" }} />
+          ) : (
+            <FaBars size={20} style={{ color: "white" }} />
+          )}
+        </div>
       </div>
-      <div className="header_down">
+      <div className={isNavSeen ? "header_down active" : "header_down"}>
         <ul className="down_list">
           <li>Best Sellers</li>
           <li>Basics</li>

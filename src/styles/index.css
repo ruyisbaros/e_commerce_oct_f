@@ -82,6 +82,15 @@ img {
   color: #ffc000;
 }
 
+@media (max-width: 800px) {
+  .App .main {
+    /* background-color: #ccc; */
+    max-width: 95vw;
+
+    /* background-color: #eee; */
+  }
+}
+
 /* IMPORT STYLES */
 @import url("./loading.css");
 @import url("./header.css");

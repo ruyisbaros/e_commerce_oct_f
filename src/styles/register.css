@@ -175,8 +175,19 @@
     width: 60%;
   }
 }
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .register_sorround {
     width: 80%;
+  }
+  .register .register_form {
+    width: 90%;
+  }
+}
+@media (max-width: 500px) {
+  .register_sorround {
+    width: 90%;
+  }
+  .register .register_form {
+    width: 90%;
   }
 }
