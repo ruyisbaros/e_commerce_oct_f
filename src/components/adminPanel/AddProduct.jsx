@@ -37,7 +37,9 @@ const AddProduct = () => {
   }, [index, images]);
   const fetchCategories = async () => {
     try {
-      const { data } = await axios.get("/api/v1/categories/user/all");
+      const { data } = await axios.get(
+        "https://my-ecom-back.herokuapp.com/api/v1/categories/user/all"
+      );
       console.log(data);
       setCategories(data);
     } catch (error) {
@@ -74,7 +76,7 @@ const AddProduct = () => {
   let newImages = [];
   const imageUpload = async (dt) => {
     const { data } = await axios.post(
-      "/api/v1/images/upload",
+      "https://my-ecom-back.herokuapp.com/api/v1/images/upload",
       dt /* {
           headers: { "content-type": "multipart/form-data", authorization: token }
       } */
@@ -117,7 +119,7 @@ const AddProduct = () => {
   const deleteImage = async () => {
     setSelectedFile("");
     const { data } = await axios.delete(
-      `/api/v1/images/delete/${selectedImageId}`
+      `https://my-ecom-back.herokuapp.com/api/v1/images/delete/${selectedImageId}`
       /* { headers: { Authorization: `Bearer ${token}` } } */
     );
     setNewProduct({ ...newProduct, imageId: "frnuturkacwbwlwh00bs" });
@@ -127,9 +129,12 @@ const AddProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/products/admin/create", {
-        ...newProduct,
-      });
+      const { data } = await axios.post(
+        "https://my-ecom-back.herokuapp.com/api/v1/products/admin/create",
+        {
+          ...newProduct,
+        }
+      );
       console.log(data);
       navigate("/products");
     } catch (error) {

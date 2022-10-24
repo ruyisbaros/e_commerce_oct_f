@@ -11,7 +11,9 @@ const Category = ({ id, categoryName, description, image }) => {
 
   const deleteHandle = async () => {
     try {
-      await axios.delete(`/api/v1/categories/admin/delete/${id}`);
+      await axios.delete(
+        `https://my-ecom-back.herokuapp.com/api/v1/categories/admin/delete/${id}`
+      );
       window.location.reload();
     } catch (error) {
       toast.error(error.response.data.message);

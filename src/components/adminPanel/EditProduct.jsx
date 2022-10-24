@@ -29,7 +29,9 @@ const EditProduct = () => {
     productImages,
   } = editedProduct;
   const fetchProduct = async () => {
-    const { data } = await axios.get(`/api/v1/products/user/one/${id}`);
+    const { data } = await axios.get(
+      `https://my-ecom-back.herokuapp.com/api/v1/products/user/one/${id}`
+    );
     console.log(data);
     seteditedProduct({
       ...editedProduct,
@@ -53,7 +55,9 @@ const EditProduct = () => {
   }, [index, images]);
   const fetchCategories = async () => {
     try {
-      const { data } = await axios.get("/api/v1/categories/user/all");
+      const { data } = await axios.get(
+        "https://my-ecom-back.herokuapp.com/api/v1/categories/user/all"
+      );
       console.log(data);
       setCategories(data);
     } catch (error) {
@@ -91,7 +95,7 @@ const EditProduct = () => {
   let newImages = [];
   const imageUpload = async (dt) => {
     const { data } = await axios.post(
-      "/api/v1/images/upload",
+      "https://my-ecom-back.herokuapp.com/api/v1/images/upload",
       dt /* {
           headers: { "content-type": "multipart/form-data", authorization: token }
       } */
@@ -134,7 +138,7 @@ const EditProduct = () => {
   const deleteImage = async () => {
     setSelectedFile("");
     const { data } = await axios.delete(
-      `/api/v1/images/delete/${selectedImageId}`
+      `https://my-ecom-back.herokuapp.com/api/v1/images/delete/${selectedImageId}`
       /* { headers: { Authorization: `Bearer ${token}` } } */
     );
     seteditedProduct({ ...editedProduct, imageId: "frnuturkacwbwlwh00bs" });
@@ -144,9 +148,12 @@ const EditProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put(`/api/v1/products/admin/update/${id}`, {
-        ...editedProduct,
-      });
+      const { data } = await axios.put(
+        `https://my-ecom-back.herokuapp.com/api/v1/products/admin/update/${id}`,
+        {
+          ...editedProduct,
+        }
+      );
       console.log(data);
       navigate("/products");
     } catch (error) {

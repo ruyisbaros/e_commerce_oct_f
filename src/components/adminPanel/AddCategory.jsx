@@ -57,7 +57,10 @@ const AddCategory = () => {
       let formData = new FormData();
       formData.append("multipartFile", file);
 
-      const { data } = await axios.post("/api/v1/images/upload", formData);
+      const { data } = await axios.post(
+        "https://my-ecom-back.herokuapp.com/api/v1/images/upload",
+        formData
+      );
       setIsCreated(false);
       console.log(data);
       setSelectedImageId(data.imageId);
@@ -71,7 +74,7 @@ const AddCategory = () => {
   const deleteImage = async () => {
     setSelectedFile("");
     const { data } = await axios.delete(
-      `/api/v1/images/delete/${selectedImageId}`
+      `https://my-ecom-back.herokuapp.com/api/v1/images/delete/${selectedImageId}`
       /* { headers: { Authorization: `Bearer ${token}` } } */
     );
     setNewCategory({ ...setNewCategory, imageId: "frnuturkacwbwlwh00bs" });
@@ -81,11 +84,14 @@ const AddCategory = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/categories/admin/create", {
-        categoryName,
-        description,
-        imageId,
-      });
+      const { data } = await axios.post(
+        "https://my-ecom-back.herokuapp.com/api/v1/categories/admin/create",
+        {
+          categoryName,
+          description,
+          imageId,
+        }
+      );
       console.log(data);
       navigate("/admin/categories");
     } catch (error) {

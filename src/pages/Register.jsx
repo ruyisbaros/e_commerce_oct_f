@@ -80,7 +80,10 @@ const Register = () => {
       let formData = new FormData();
       formData.append("multipartFile", file);
 
-      const { data } = await axios.post("/api/v1/images/upload", formData);
+      const { data } = await axios.post(
+        "https://my-ecom-back.herokuapp.com/api/v1/images/upload",
+        formData
+      );
       setIsCreated(false);
       console.log(data);
       setSelectedImageId(data.imageId);
@@ -94,7 +97,7 @@ const Register = () => {
   const deleteImage = async () => {
     setSelectedFile("");
     const { data } = await axios.delete(
-      `/api/v1/images/delete/${selectedImageId}`
+      `https://my-ecom-back.herokuapp.com/api/v1/images/delete/${selectedImageId}`
       /* { headers: { Authorization: `Bearer ${token}` } } */
     );
     setSignUpUser({ ...signUpUser, imageId: "pw4gq42vstslcyqzi81o" });
@@ -106,14 +109,17 @@ const Register = () => {
     if (confPassword === password) {
       try {
         dispatch(userLoggedStart());
-        const { data } = await axios.post("/api/v1/auth/register", {
-          firstName,
-          lastName,
-          imageId,
-          email,
-          password,
-          roles,
-        });
+        const { data } = await axios.post(
+          "https://my-ecom-back.herokuapp.com/api/v1/auth/register",
+          {
+            firstName,
+            lastName,
+            imageId,
+            email,
+            password,
+            roles,
+          }
+        );
         console.log(data);
         dispatch(userLoggedFinish());
         dispatch(

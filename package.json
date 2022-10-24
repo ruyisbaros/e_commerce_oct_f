@@ -1,9 +1,7 @@
 {
-  
   "name": "e_commerce_oct_front",
   "version": "0.1.0",
   "private": true,
-  
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -50,10 +48,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "gh-pages": "^4.0.0"
   }
- 
-
 }

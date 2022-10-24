@@ -17,9 +17,12 @@ const EditUser = ({ token }) => {
   const { rolesContext } = useSelector((store) => store.rolesContext);
   useEffect(() => {
     const getRoles = async () => {
-      const { data } = await axios.get("/api/v1/users/admin/get_roles", {
-        /*  headers: { Authorization: `Bearer ${token}` }, */
-      });
+      const { data } = await axios.get(
+        "https://my-ecom-back.herokuapp.com/api/v1/users/admin/get_roles",
+        {
+          /*  headers: { Authorization: `Bearer ${token}` }, */
+        }
+      );
       //console.log(data);
       dispatch(fetchRoles(data));
     };
@@ -45,9 +48,12 @@ const EditUser = ({ token }) => {
   const [isCreated, setIsCreated] = useState(false);
 
   const fetchUser = async () => {
-    const { data } = await axios.get(`/api/v1/users/get_user/${id}`, {
-      /*  headers: { Authorization: `Bearer ${token}` }, */
-    });
+    const { data } = await axios.get(
+      `https://my-ecom-back.herokuapp.com/api/v1/users/get_user/${id}`,
+      {
+        /*  headers: { Authorization: `Bearer ${token}` }, */
+      }
+    );
     console.log(data);
     setExistingEmail(data.email);
     setEditUser({
@@ -107,12 +113,16 @@ const EditUser = ({ token }) => {
     let formData = new FormData();
     formData.append("multipartFile", file);
 
-    const { data } = await axios.post("/api/v1/images/upload", formData, {
-      /*  headers: {
+    const { data } = await axios.post(
+      "https://my-ecom-back.herokuapp.com/api/v1/images/upload",
+      formData,
+      {
+        /*  headers: {
         "content-type": "multipart/form-data",
         Authorization: `Bearer ${token}`,
       }, */
-    });
+      }
+    );
     setIsCreated(false);
     console.log(data);
     setSelectedImageId(data.imageId);
@@ -126,7 +136,7 @@ const EditUser = ({ token }) => {
   const deleteImage = async () => {
     setSelectedFile("");
     const { data } = await axios.delete(
-      `/api/v1/images/delete/${selectedImageId}`
+      `https://my-ecom-back.herokuapp.com/api/v1/images/delete/${selectedImageId}`
       /*  { headers: { Authorization: `Bearer ${token}` } } */
     );
     setEditUser({ ...editUser, imageId: "" });
@@ -162,7 +172,7 @@ const EditUser = ({ token }) => {
     let isEmailUnique = false;
     if (existingEmail !== editUser.email) {
       isEmailUnique = await axios.get(
-        `/api/v1/admin/users/is_email_unique/${editUser.email}`
+        `https://my-ecom-back.herokuapp.com/api/v1/admin/users/is_email_unique/${editUser.email}`
         /*  { headers: { Authorization: `Bearer ${token}` } } */
       );
     }
@@ -171,7 +181,7 @@ const EditUser = ({ token }) => {
 
     if (!isEmailUnique.data) {
       const { data } = await axios.put(
-        `/api/v1/users/update_user/${id}`,
+        `https://my-ecom-back.herokuapp.com/api/v1/users/update_user/${id}`,
         {
           ...editUser,
         }

@@ -9,7 +9,9 @@ const Products = ({ currentUser, token }) => {
 
   const fetchProducts = async () => {
     try {
-      const { data } = await axios.get("/api/v1/products/user/all");
+      const { data } = await axios.get(
+        "https://my-ecom-back.herokuapp.com/api/v1/products/user/all"
+      );
       console.log(data);
       setProducts(data);
     } catch (error) {

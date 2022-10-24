@@ -22,7 +22,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "https://spontaneous-smakager-7d40b4.netlify.app/api/v1/auth/login",
+        "https://my-ecom-back.herokuapp.com/api/v1/auth/login",
         {
           ...loggedUser,
         }

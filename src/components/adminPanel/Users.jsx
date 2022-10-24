@@ -74,7 +74,7 @@ const Users = ({ token }) => {
   const handleDelete = async () => {
     try {
       await axios.delete(
-        `/api/v1/admin/users/delete_user/${deletedUserInfo.id}`,
+        `https://my-ecom-back.herokuapp.com/api/v1/admin/users/delete_user/${deletedUserInfo.id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       toast.success("User has been deleted successufully");
@@ -88,9 +88,13 @@ const Users = ({ token }) => {
   const handleEnableDisable = async (id) => {
     try {
       dispatch(usersFetchStart());
-      await axios.put(`/api/v1/users/admin/user_enabled_disabled/${id}`, null, {
-        /* headers: { Authorization: `Bearer ${token}` }, */
-      });
+      await axios.put(
+        `https://my-ecom-back.herokuapp.com/api/v1/users/admin/user_enabled_disabled/${id}`,
+        null,
+        {
+          /* headers: { Authorization: `Bearer ${token}` }, */
+        }
+      );
       dispatch(usersFetchFinish());
       window.location.reload();
     } catch (error) {
@@ -104,15 +108,15 @@ const Users = ({ token }) => {
       <h2>Manage Users</h2>
       <div>
         <Link to="/new_user">Create New User |</Link>
-        <a href="http://localhost:8080/api/v1/admin/users/export_csv">
+        <a href="https://my-ecom-back.herokuapp.com/api/v1/admin/users/export_csv">
           {" "}
           Export to CSV |
         </a>
-        <a href="http://localhost:8080/api/v1/admin/users/export_excel">
+        <a href="https://my-ecom-back.herokuapp.com/api/v1/admin/users/export_excel">
           {" "}
           Export to Excel |
         </a>
-        <a href="http://localhost:8080/api/v1/admin/users/export_pdf">
+        <a href="https://my-ecom-back.herokuapp.com/api/v1/admin/users/export_pdf">
           {" "}
           Export to PDF{" "}
         </a>

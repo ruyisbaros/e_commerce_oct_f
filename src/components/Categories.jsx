@@ -9,7 +9,9 @@ const Categories = () => {
 
   const fetchCategories = async () => {
     try {
-      const { data } = await axios.get("/api/v1/categories/user/all");
+      const { data } = await axios.get(
+        "https://my-ecom-back.herokuapp.com/api/v1/categories/user/all"
+      );
       console.log(data);
       setCategories(data);
     } catch (error) {
