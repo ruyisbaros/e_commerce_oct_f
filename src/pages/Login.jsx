@@ -5,9 +5,12 @@ import { toast } from "react-toastify";
 import logoImg from "../assets/logo-main.png";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { FaFacebookF } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { userLoggedFinish, userLoggedStart } from "../redux/loggedUserSlicer";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [loggedUser, setLoggedUser] = useState({ email: "", password: "" });
   const { email, password } = loggedUser;
   const [passType, setPassType] = useState(false);
@@ -21,6 +24,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      dispatch(userLoggedStart());
       const { data } = await axios.post(
         "https://my-ecom-back.herokuapp.com/api/v1/auth/login",
         {
@@ -31,9 +35,11 @@ const Login = () => {
       localStorage.setItem("token", data[0]);
       localStorage.setItem("currentUser", JSON.stringify(data[1]));
       /* toast.success("You are in"); */
+      dispatch(userLoggedFinish());
       navigate("/");
       window.location.reload();
     } catch (error) {
+      dispatch(userLoggedFinish());
       toast.error(error.response.data.message);
     }
   };

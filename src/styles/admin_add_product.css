@@ -145,3 +145,16 @@
 .product_submit {
   padding: 2rem 0;
 }
+
+@media (max-width: 1280px) {
+  .add_product .add_product_form {
+    width: 60%;
+  }
+
+  .add_product_form input {
+    width: 80%;
+  }
+  .add_product_form textarea {
+    width: 80%;
+  }
+}

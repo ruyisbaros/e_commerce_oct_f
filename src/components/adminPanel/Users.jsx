@@ -44,8 +44,8 @@ const Users = ({ token }) => {
 
     try {
       const { data } = await axios.get(
-        `/api/v1/users/admin/all?pageSize=${pageSize}&pageNo=${pageNumber}&sortDir=${sortDir}&sortField=${sortField}&keyword=${keyword}`,
-        { headers: { Authorization: `Bearer ${token}` } }
+        `https://my-ecom-back.herokuapp.com/api/v1/users/admin/all?pageSize=${pageSize}&pageNo=${pageNumber}&sortDir=${sortDir}&sortField=${sortField}&keyword=${keyword}`
+        /*   { headers: { Authorization: `Bearer ${token}` } } */
       );
       dispatch(usersFetchFinish());
       console.log(data);

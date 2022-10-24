@@ -125,3 +125,14 @@
 .forgot_password .forgot {
   cursor: pointer;
 }
+
+@media (max-width: 1280px) {
+  .login_sorround {
+    width: 60%;
+  }
+}
+@media (max-width: 800px) {
+  .login_sorround {
+    width: 80%;
+  }
+}
