@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import catDefault from "../../assets/cat-default.png";
 import loadingGif from "../../assets/loading.gif";
 
-const EditCategory = () => {
+const EditCategory = ({ token }) => {
   const { id } = useParams();
   console.log(id);
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const EditCategory = () => {
   const fetchCategory = async () => {
     try {
       const { data } = await axios.get(
-        `https://my-ecom-back.herokuapp.com/api/v1/categories/get_by_id/${id}`
+        `https://my-ecom-back.herokuapp.com/api/v1/categories/user/get_by_id/${id}`
       );
       console.log(data);
       setupdatedCategory({
@@ -118,6 +118,7 @@ const EditCategory = () => {
           description,
           imageId,
         }
+        /* { headers: { Authorization: `Bearer ${token}` } } */
       );
       console.log(data);
       navigate("/admin/categories");

@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import catDefault from "../../assets/cat-default.png";
 import loadingGif from "../../assets/loading.gif";
 
-const AddCategory = () => {
+const AddCategory = ({ token }) => {
   const navigate = useNavigate();
   const [isCreated, setIsCreated] = useState(false);
   const [newCategory, setNewCategory] = useState({
@@ -91,6 +91,7 @@ const AddCategory = () => {
           description,
           imageId,
         }
+        /*  { headers: { Authorization: `Bearer ${token}` } } */
       );
       console.log(data);
       navigate("/admin/categories");

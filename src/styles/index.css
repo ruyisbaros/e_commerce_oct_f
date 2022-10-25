@@ -54,7 +54,7 @@ img {
 
 .App .main {
   /* background-color: #ccc; */
-  max-width: 80vw;
+  max-width: 90vw;
   width: 100%;
   min-height: 100vh;
   margin: auto;
@@ -106,3 +106,4 @@ img {
 @import url("./single_product.css");
 @import url("./product_details.css");
 @import url("./users.css");
+@import url("./product_view.css");

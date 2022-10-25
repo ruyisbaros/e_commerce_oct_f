@@ -13,6 +13,11 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import Avatar from "../../assets/default-user.png";
+import {
+  loadingFail,
+  loadingFinish,
+  loadingStart,
+} from "../../redux/loadSlicer";
 
 const Users = ({ token }) => {
   const { users } = useSelector((store) => store.users);
@@ -43,9 +48,10 @@ const Users = ({ token }) => {
     dispatch(usersFetchStart());
 
     try {
+      dispatch(loadingStart());
       const { data } = await axios.get(
         `https://my-ecom-back.herokuapp.com/api/v1/users/admin/all?pageSize=${pageSize}&pageNo=${pageNumber}&sortDir=${sortDir}&sortField=${sortField}&keyword=${keyword}`
-        /*   { headers: { Authorization: `Bearer ${token}` } } */
+        /*  { headers: { Authorization: `Bearer ${token}` } } */
       );
       dispatch(usersFetchFinish());
       console.log(data);
@@ -54,8 +60,10 @@ const Users = ({ token }) => {
       setIsFirstPage(data.first);
       setIsLastPage(data.last);
       dispatch(usersFetchSuccess(data.content));
+      dispatch(loadingFinish());
     } catch (error) {
       dispatch(usersFetchFinish());
+      dispatch(loadingFail());
     }
   };
 
@@ -74,8 +82,8 @@ const Users = ({ token }) => {
   const handleDelete = async () => {
     try {
       await axios.delete(
-        `https://my-ecom-back.herokuapp.com/api/v1/admin/users/delete_user/${deletedUserInfo.id}`,
-        { headers: { Authorization: `Bearer ${token}` } }
+        `https://my-ecom-back.herokuapp.com/api/v1/users/admin/delete_user/${deletedUserInfo.id}`
+        /*  { headers: { Authorization: `Bearer ${token}` } } */
       );
       toast.success("User has been deleted successufully");
       window.location.reload();
@@ -90,10 +98,10 @@ const Users = ({ token }) => {
       dispatch(usersFetchStart());
       await axios.put(
         `https://my-ecom-back.herokuapp.com/api/v1/users/admin/user_enabled_disabled/${id}`,
-        null,
-        {
-          /* headers: { Authorization: `Bearer ${token}` }, */
-        }
+        null
+        /*  {
+          headers: { Authorization: `Bearer ${token}` },
+        } */
       );
       dispatch(usersFetchFinish());
       window.location.reload();
@@ -107,7 +115,7 @@ const Users = ({ token }) => {
     <div className="users_container">
       <h2>Manage Users</h2>
       <div>
-        <Link to="/new_user">Create New User |</Link>
+        <Link to="/register">Create New User |</Link>
         <a href="https://my-ecom-back.herokuapp.com/api/v1/admin/users/export_csv">
           {" "}
           Export to CSV |

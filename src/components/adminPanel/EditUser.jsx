@@ -18,10 +18,10 @@ const EditUser = ({ token }) => {
   useEffect(() => {
     const getRoles = async () => {
       const { data } = await axios.get(
-        "https://my-ecom-back.herokuapp.com/api/v1/users/admin/get_roles",
-        {
-          /*  headers: { Authorization: `Bearer ${token}` }, */
-        }
+        "https://my-ecom-back.herokuapp.com/api/v1/users/admin/get_roles"
+        /* {
+          headers: { Authorization: `Bearer ${token}` },
+        } */
       );
       //console.log(data);
       dispatch(fetchRoles(data));
@@ -49,7 +49,7 @@ const EditUser = ({ token }) => {
 
   const fetchUser = async () => {
     const { data } = await axios.get(
-      `https://my-ecom-back.herokuapp.com/api/v1/users/get_user/${id}`,
+      `https://my-ecom-back.herokuapp.com/api/v1/users/user/get_user/${id}`,
       {
         /*  headers: { Authorization: `Bearer ${token}` }, */
       }
@@ -172,7 +172,7 @@ const EditUser = ({ token }) => {
     let isEmailUnique = false;
     if (existingEmail !== editUser.email) {
       isEmailUnique = await axios.get(
-        `https://my-ecom-back.herokuapp.com/api/v1/admin/users/is_email_unique/${editUser.email}`
+        `https://my-ecom-back.herokuapp.com/api/v1/admin/users/user/is_email_unique/${editUser.email}`
         /*  { headers: { Authorization: `Bearer ${token}` } } */
       );
     }
@@ -181,11 +181,11 @@ const EditUser = ({ token }) => {
 
     if (!isEmailUnique.data) {
       const { data } = await axios.put(
-        `https://my-ecom-back.herokuapp.com/api/v1/users/update_user/${id}`,
+        `https://my-ecom-back.herokuapp.com/api/v1/users/admin/update_user_admin/${id}`,
         {
           ...editUser,
         }
-        /*  { headers: { Authorization: `Bearer ${token}` } } */
+        /* { headers: { Authorization: `Bearer ${token}` } } */
       );
       //console.log(data);
       toast.success("User has been updated successufully..");

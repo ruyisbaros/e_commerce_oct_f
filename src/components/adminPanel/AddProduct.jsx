@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import loadingImg from "../../assets/loading.gif";
 
-const AddProduct = () => {
+const AddProduct = ({ token }) => {
   const navigate = useNavigate();
   const [isCreated, setIsCreated] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -134,6 +134,7 @@ const AddProduct = () => {
         {
           ...newProduct,
         }
+        /* { headers: { Authorization: `Bearer ${token}` } } */
       );
       console.log(data);
       navigate("/products");

@@ -43,7 +43,9 @@ const Product = ({
         </span>
       )}
       <div className="product_img">
-        <img src={productImages[0].imageUrl} alt="" />
+        <Link to={`/product/view/${id}`} className="link_class">
+          <img src={productImages[0].imageUrl} alt="" />
+        </Link>
       </div>
       <div className="product_info">
         <p className="product_name">{productName}</p>

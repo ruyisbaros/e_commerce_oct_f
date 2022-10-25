@@ -32,9 +32,11 @@ import Users from "./components/adminPanel/Users";
 import EditUser from "./components/adminPanel/EditUser";
 
 import "react-app-polyfill/stable";
+import ProductView from "./components/ProductView";
 
 function App() {
   const { logging } = useSelector((store) => store.currentUser);
+  const { loading } = useSelector((store) => store.loadStatus);
 
   const [token, setToken] = useState("");
   const [currentUser, setCurrentUser] = useState({});
@@ -54,6 +56,7 @@ function App() {
     <BrowserRouter>
       <ToastContainer position="bottom-center" limit={1} />
       {logging && <Loading />}
+      {loading && <Loading />}
       <div className="App">
         {token ? (
           currentUser.roles.map((r) => r.roleName).includes("Admin") ? (
@@ -84,23 +87,36 @@ function App() {
             <Route path="/forgot_password" element={<ForgotPassword />} />
             <Route path="/register" element={<Register />} />
             <Route path="/card" element={<ShopCard />} />
-            <Route path="/admin/categories" element={<Categories />} />
+            <Route
+              path="/admin/categories"
+              element={<Categories token={token} />}
+            />
             <Route
               path="/products"
               element={<Products currentUser={currentUser} token={token} />}
             />
             <Route path="/admin/sub_products" element={<SubProducts />} />
-            <Route path="/admin/categories/add" element={<AddCategory />} />
+            <Route
+              path="/admin/categories/add"
+              element={<AddCategory token={token} />}
+            />
             <Route
               path="/admin/categories/update/:id"
-              element={<EditCategory />}
+              element={<EditCategory token={token} />}
+            />
+            <Route
+              path="/product/view/:id"
+              element={<ProductView token={token} />}
             />
             <Route
               path="/admin/products/update/:id"
-              element={<EditProduct />}
+              element={<EditProduct token={token} />}
             />
-            <Route path="/admin/products/add" element={<AddProduct />} />
-            <Route path="/admin/users" element={<Users />} />
+            <Route
+              path="/admin/products/add"
+              element={<AddProduct token={token} />}
+            />
+            <Route path="/admin/users" element={<Users token={token} />} />
             <Route
               path="/admin/update_user/:id"
               element={<EditUser token={token} />}
