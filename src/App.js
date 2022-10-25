@@ -9,7 +9,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./components/Header";
-import Home from "./pages/Home";
+import ClientHome from "./pages/ClientHome";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ShopCard from "./pages/ShopCard";
@@ -76,10 +76,10 @@ function App() {
                   currentUser.roles.map((r) => r.roleName).includes("Admin") ? (
                     <AdminHome />
                   ) : (
-                    <Home />
+                    <ClientHome />
                   )
                 ) : (
-                  <Home />
+                  <ClientHome />
                 )
               }
             />

@@ -1,0 +1,44 @@
+.client_home {
+  padding-top: 2rem;
+  width: 100%;
+  min-height: 100vh;
+}
+.client_home_banner {
+  position: relative;
+  width: 80%;
+  margin: 1rem auto;
+  height: 200px;
+}
+.slider img {
+  width: 100%;
+  border-radius: 5px;
+}
+.slider {
+  width: 100%;
+  opacity: 0;
+  transition: 1s ease;
+}
+
+.slider.active {
+  opacity: 1;
+  transition: 1s;
+  transform: scale(1.08);
+}
+.client_home_banner ul {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  bottom: -2rem;
+  right: 0;
+}
+.client_home_banner ul li {
+  border: 2px solid #eee;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #3f4c58;
+  cursor: pointer;
+}
+.client_home_banner ul .active {
+  background-color: #e01936;
+}
