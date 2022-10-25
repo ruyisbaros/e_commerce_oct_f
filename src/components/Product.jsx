@@ -50,7 +50,7 @@ const Product = ({
       <div className="product_info">
         <p className="product_name">{productName}</p>
         <p className="product_desc">{description}</p>
-        <Rating rating={rate} numReviews={rate_times} />
+        <Rating rating={rate / rate_times} numReviews={rate_times} />
         <div className="deal">
           <p className="perc">%10 off</p>
           <p className="deal_text">Deal</p>

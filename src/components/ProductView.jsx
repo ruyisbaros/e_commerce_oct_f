@@ -5,7 +5,9 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { loadingFail, loadingFinish, loadingStart } from "../redux/loadSlicer";
 import Rating from "./Rating";
+import Rate from "./Rate";
 import { BiEuro } from "react-icons/bi";
+import { AiOutlineDown } from "react-icons/ai";
 
 const ProductView = () => {
   const dispatch = useDispatch();
@@ -13,6 +15,8 @@ const ProductView = () => {
   console.log(id);
   const [singleProduct, setSingleProduct] = useState(null);
   const [bigImageIndex, setBigImageIndex] = useState(null);
+  const [basketQuantity, setBasketQuantity] = useState(0);
+  const [ratingBoxSeen, setRatingBoxSeen] = useState(false);
 
   useEffect(() => {
     setBigImageIndex(0);
@@ -36,12 +40,34 @@ const ProductView = () => {
   }, [id, dispatch]);
 
   console.log(singleProduct);
+  //console.log(ratingValue);
 
   const [bigImage, setBigImage] = useState("");
   useEffect(() => {
     setBigImage(singleProduct?.productImages[bigImageIndex]?.imageUrl);
   }, [bigImageIndex, id, singleProduct?.productImages]);
   //console.log(bigImage);
+
+  //console.log(ratingValue);
+  //let rate;
+  const handleRating = async (i) => {
+    try {
+      dispatch(loadingStart());
+      const { data } = await axios.put(
+        `https://my-ecom-back.herokuapp.com/api/v1/products/user/update/rate/${id}?rate=${
+          i + 1
+        }`,
+        null
+      );
+      console.log(data);
+      dispatch(loadingFinish());
+      setRatingBoxSeen(false);
+      window.location.reload();
+    } catch (error) {
+      toast.error(error.response.data.message);
+      dispatch(loadingFinish());
+    }
+  };
 
   return (
     <div className="product_review">
@@ -73,10 +99,39 @@ const ProductView = () => {
 
         <h3>{singleProduct?.productName}</h3>
         <h4 className="product-description">{singleProduct?.description}</h4>
-        <Rating
-          rating={singleProduct?.rate}
-          numReviews={singleProduct?.rate_times}
-        />
+        <div className="rating_actions">
+          <Rating
+            rating={singleProduct?.rate / singleProduct?.rate_times}
+            numReviews={singleProduct?.rate_times}
+          />
+          <div className="rating_box_review">
+            <h5 className="rate_product_title">
+              Rate Product{" "}
+              <span
+                style={{ cursor: "pointer" }}
+                onClick={() => setRatingBoxSeen(!ratingBoxSeen)}
+              >
+                <AiOutlineDown size={15} />
+              </span>
+            </h5>
+            {ratingBoxSeen && (
+              <div className="rate_the_product">
+                {Array.from({ length: 5 }, (_, i) => i + 1).map(
+                  (val, index) => (
+                    <div
+                      key={index}
+                      onClick={() => handleRating(index)}
+                      className="rate_value"
+                    >
+                      <span>{index + 1} stars</span>
+                      <Rate rating={index + 1} />
+                    </div>
+                  )
+                )}
+              </div>
+            )}
+          </div>
+        </div>
         <div className="deal">
           <p className="perc">%10 off</p>
           <p className="deal_text">Deal</p>
@@ -89,7 +144,46 @@ const ProductView = () => {
           <span className="zero">00</span>
         </h3>
       </div>
-      <div className="product_review-right">right</div>
+      <div className="product_review-right">
+        <h3 className="price_info">
+          <span className="euro">
+            <BiEuro />
+          </span>
+          {singleProduct?.price}
+          <span className="zero">00</span>
+        </h3>
+        <p className="free">Free Returns</p>
+        <p className="free down">
+          Free Delivery{" "}
+          <span>
+            {new Date().getDate() + 3}/{new Date().getMonth()}/
+            {new Date().getFullYear()}
+          </span>
+        </p>
+        <p className="card-text">
+          Or fastest delivery: {new Date().getDate() + 1}/
+          {new Date().getMonth()}/{new Date().getFullYear()}
+        </p>
+        {singleProduct?.quantity > 0 ? (
+          <p className="avaliable">In Stock</p>
+        ) : (
+          <p className="avaliable-not">Not Avaliable</p>
+        )}
+        <div className="quantity">
+          <label htmlFor="quantity">Quantity:</label>
+          <input
+            type="text"
+            name="quantity"
+            id="quantity"
+            value={basketQuantity}
+            onChange={(e) => setBasketQuantity(e.target.value)}
+          />
+          <div className="action_buttons">
+            <button className="add_basket">Add to Basket</button>
+            <button className="buy_now">Buy Now</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
