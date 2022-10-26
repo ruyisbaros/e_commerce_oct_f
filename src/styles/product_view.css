@@ -1,3 +1,15 @@
+.product_review_container {
+  width: 100%;
+  min-height: 100vh;
+}
+.product_review_container .product_review_container-banner {
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+.product_review_container .product_review_container-banner img {
+  width: 100%;
+}
 .product_review {
   width: 100%;
   min-height: 100vh;
@@ -193,6 +205,9 @@
   }
   .product_review-right {
     width: 25%;
+  }
+  .rate_the_product {
+    width: 100%;
   }
 }
 @media (max-width: 800px) {

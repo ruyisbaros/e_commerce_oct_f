@@ -1,0 +1,15 @@
+.underconst {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.underconst h1 {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.underconst img {
+  width: 60%;
+  display: block;
+  margin: 1rem auto;
+}

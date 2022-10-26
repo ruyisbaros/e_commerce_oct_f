@@ -95,12 +95,26 @@ const Header = ({ token }) => {
       </div>
       <div className={isNavSeen ? "header_down active" : "header_down"}>
         <ul className="down_list">
-          <li>Best Sellers</li>
-          <li>Basics</li>
-          <li>Firsatlar</li>
-          <li>Categories</li>
-          <li>Customer Service</li>
-          <li>Careers</li>
+          <li>
+            <Link to="/developing" className="link_class">
+              Best Sellers
+            </Link>
+          </li>
+          <li>
+            <Link to="/developing" className="link_class">
+              Sale
+            </Link>
+          </li>
+          <li>
+            <Link to="/developing" className="link_class">
+              Categories
+            </Link>
+          </li>
+          <li>
+            <Link to="/developing" className="link_class">
+              Careers
+            </Link>
+          </li>
         </ul>
       </div>
     </div>
