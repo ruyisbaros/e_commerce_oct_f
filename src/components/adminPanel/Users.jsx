@@ -50,8 +50,8 @@ const Users = ({ token }) => {
     try {
       dispatch(loadingStart());
       const { data } = await axios.get(
-        `https://my-ecom-back.herokuapp.com/api/v1/users/admin/all?pageSize=${pageSize}&pageNo=${pageNumber}&sortDir=${sortDir}&sortField=${sortField}&keyword=${keyword}`
-        /*  { headers: { Authorization: `Bearer ${token}` } } */
+        `https://my-ecom-back.herokuapp.com/api/v1/users/admin/all?pageSize=${pageSize}&pageNo=${pageNumber}&sortDir=${sortDir}&sortField=${sortField}&keyword=${keyword}`,
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       dispatch(usersFetchFinish());
       console.log(data);
@@ -82,8 +82,8 @@ const Users = ({ token }) => {
   const handleDelete = async () => {
     try {
       await axios.delete(
-        `https://my-ecom-back.herokuapp.com/api/v1/users/admin/delete_user/${deletedUserInfo.id}`
-        /*  { headers: { Authorization: `Bearer ${token}` } } */
+        `https://my-ecom-back.herokuapp.com/api/v1/users/admin/delete_user/${deletedUserInfo.id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       toast.success("User has been deleted successufully");
       window.location.reload();
@@ -98,10 +98,10 @@ const Users = ({ token }) => {
       dispatch(usersFetchStart());
       await axios.put(
         `https://my-ecom-back.herokuapp.com/api/v1/users/admin/user_enabled_disabled/${id}`,
-        null
-        /*  {
+        null,
+        {
           headers: { Authorization: `Bearer ${token}` },
-        } */
+        }
       );
       dispatch(usersFetchFinish());
       window.location.reload();

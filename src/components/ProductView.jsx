@@ -10,7 +10,7 @@ import { BiEuro } from "react-icons/bi";
 import { AiOutlineDown } from "react-icons/ai";
 import image2 from "../assets/b2.jpg";
 
-const ProductView = () => {
+const ProductView = ({ token }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
   console.log(id);
@@ -58,7 +58,8 @@ const ProductView = () => {
         `https://my-ecom-back.herokuapp.com/api/v1/products/user/update/rate/${id}?rate=${
           i + 1
         }`,
-        null
+        null /* ,
+        { headers: { Authorization: `Bearer ${token}` } } */
       );
       console.log(data);
       dispatch(loadingFinish());

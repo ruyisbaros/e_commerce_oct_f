@@ -117,8 +117,8 @@ const EditCategory = ({ token }) => {
           categoryName,
           description,
           imageId,
-        }
-        /* { headers: { Authorization: `Bearer ${token}` } } */
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       console.log(data);
       navigate("/admin/categories");

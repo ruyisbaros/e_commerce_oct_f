@@ -30,6 +30,7 @@ const Login = () => {
         {
           ...loggedUser,
         }
+        /*  { headers: { "Content-Type": "application/json" } } */
       );
       //console.log(data);
       localStorage.setItem("token", data[0]);

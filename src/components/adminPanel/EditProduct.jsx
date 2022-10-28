@@ -152,8 +152,8 @@ const EditProduct = ({ token }) => {
         `https://my-ecom-back.herokuapp.com/api/v1/products/admin/update/${id}`,
         {
           ...editedProduct,
-        }
-        /* { headers: { Authorization: `Bearer ${token}` } } */
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       console.log(data);
       navigate("/products");

@@ -38,7 +38,7 @@ const Register = () => {
     setSignUpUser({ ...signUpUser, [e.target.name]: e.target.value });
   };
 
-  console.log(signUpUser);
+  //console.log(signUpUser);
 
   //Profile image settings start
   const [selectedFile, setSelectedFile] = useState("");

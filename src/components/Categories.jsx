@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { loadingFail, loadingFinish, loadingStart } from "../redux/loadSlicer";
 import Category from "./Category";
 
-const Categories = () => {
+const Categories = ({ token }) => {
   const dispatch = useDispatch();
   const [categories, setCategories] = useState([]);
 
@@ -40,7 +40,7 @@ const Categories = () => {
       </div>
       <div className="category_sorround">
         {categories?.map((cat) => (
-          <Category key={cat.id} {...cat} />
+          <Category key={cat.id} {...cat} token={token} />
         ))}
       </div>
     </div>

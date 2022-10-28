@@ -133,8 +133,8 @@ const AddProduct = ({ token }) => {
         "https://my-ecom-back.herokuapp.com/api/v1/products/admin/create",
         {
           ...newProduct,
-        }
-        /* { headers: { Authorization: `Bearer ${token}` } } */
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       console.log(data);
       navigate("/products");

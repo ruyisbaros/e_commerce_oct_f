@@ -1,5 +1,6 @@
 import {
   BrowserRouter,
+  HashRouter,
   Routes,
   Route,
   useNavigate,
@@ -31,7 +32,6 @@ import EditProduct from "./components/adminPanel/EditProduct";
 import Users from "./components/adminPanel/Users";
 import EditUser from "./components/adminPanel/EditUser";
 import UnderConst from "./pages/UnderConst.jsx";
-import "react-app-polyfill/stable";
 import ProductView from "./components/ProductView";
 
 function App() {
@@ -53,7 +53,7 @@ function App() {
   console.log(token, currentUser);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ToastContainer position="bottom-center" limit={1} />
       {logging && <Loading />}
       {loading && <Loading />}
@@ -129,7 +129,7 @@ function App() {
         </div>
         <Footer />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

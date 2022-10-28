@@ -4,6 +4,7 @@
   min-height: 100vh;
   margin-bottom: 2rem;
 }
+/* Bannner */
 .client_home_banner {
   position: relative;
   width: 80%;
@@ -51,6 +52,8 @@
   margin-top: 5rem;
   border: 1px solid #ccc;
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 10px;
   padding: 1rem;
 }
@@ -58,6 +61,9 @@
 @media (max-width: 1280px) {
   .client_home_products {
     margin-top: 2rem;
+
+    justify-content: center;
+    gap: 1rem;
   }
 }
 @media (max-width: 800px) {

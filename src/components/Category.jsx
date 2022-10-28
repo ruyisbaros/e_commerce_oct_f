@@ -5,14 +5,15 @@ import { AiOutlineMore } from "react-icons/ai";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-const Category = ({ id, categoryName, description, image }) => {
+const Category = ({ id, categoryName, description, image, token }) => {
   const navigate = useNavigate();
   const [actionShow, setActionShow] = useState(false);
 
   const deleteHandle = async () => {
     try {
       await axios.delete(
-        `https://my-ecom-back.herokuapp.com/api/v1/categories/admin/delete/${id}`
+        `https://my-ecom-back.herokuapp.com/api/v1/categories/admin/delete/${id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       window.location.reload();
     } catch (error) {

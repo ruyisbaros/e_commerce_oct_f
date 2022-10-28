@@ -18,10 +18,10 @@ const EditUser = ({ token }) => {
   useEffect(() => {
     const getRoles = async () => {
       const { data } = await axios.get(
-        "https://my-ecom-back.herokuapp.com/api/v1/users/admin/get_roles"
-        /* {
+        "https://my-ecom-back.herokuapp.com/api/v1/users/admin/get_roles",
+        {
           headers: { Authorization: `Bearer ${token}` },
-        } */
+        }
       );
       //console.log(data);
       dispatch(fetchRoles(data));
@@ -184,8 +184,8 @@ const EditUser = ({ token }) => {
         `https://my-ecom-back.herokuapp.com/api/v1/users/admin/update_user_admin/${id}`,
         {
           ...editUser,
-        }
-        /* { headers: { Authorization: `Bearer ${token}` } } */
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       //console.log(data);
       toast.success("User has been updated successufully..");
