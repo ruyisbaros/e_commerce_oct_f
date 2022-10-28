@@ -15,7 +15,7 @@ const HomeSingleProduct = ({
   currentUser,
   token,
 }) => {
-  console.log(productImages);
+  //console.log(productImages);
   return (
     <div className="home_single_product">
       <div className="img_box">

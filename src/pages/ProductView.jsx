@@ -1,17 +1,18 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { loadingFail, loadingFinish, loadingStart } from "../redux/loadSlicer";
-import Rating from "./Rating";
-import Rate from "./Rate";
+import Rating from "../components/Rating";
+import Rate from "../components/Rate";
 import { BiEuro } from "react-icons/bi";
 import { AiOutlineDown } from "react-icons/ai";
 import image2 from "../assets/b2.jpg";
 
 const ProductView = ({ token }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
   console.log(id);
   const [singleProduct, setSingleProduct] = useState(null);
@@ -185,12 +186,20 @@ const ProductView = ({ token }) => {
               onChange={(e) => setBasketQuantity(e.target.value)}
             />
             <div className="action_buttons">
-              <Link to="/developing" className="link_class">
-                <button className="add_basket">Add to Basket</button>
-              </Link>
-              <Link to="/developing" className="link_class">
-                <button className="buy_now">Buy Now</button>
-              </Link>
+              {token ? (
+                <Link to="/developing" className="link_class">
+                  <button className="add_basket">Add to Basket</button>
+                </Link>
+              ) : (
+                navigate("/login")
+              )}
+              {token ? (
+                <Link to="/developing" className="link_class">
+                  <button className="buy_now">Buy Now</button>
+                </Link>
+              ) : (
+                navigate("/login")
+              )}
             </div>
           </div>
         </div>

@@ -49,12 +49,18 @@ const Header = ({ token }) => {
             </div>
           </div>
         </div>
+
         <div className="shop-card">
-          <Link to="/card" className="link_class">
-            <FiShoppingCart size={30} />
-          </Link>
-          <span>2</span>
+          {token && (
+            <>
+              <Link to="/card" className="link_class">
+                <FiShoppingCart size={30} />
+              </Link>
+              <span>2</span>
+            </>
+          )}
         </div>
+
         {token ? (
           <div className="logged_user_info">
             <img

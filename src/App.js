@@ -6,7 +6,7 @@ import {
   useNavigate,
   Navigate,
 } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./components/Header";
@@ -15,7 +15,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ShopCard from "./pages/ShopCard";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Loading from "./utils/Loading.jsx";
 import { useEffect, useState } from "react";
 import AdminHeader from "./components/adminPanel/AdminHeader";
@@ -32,9 +32,13 @@ import EditProduct from "./components/adminPanel/EditProduct";
 import Users from "./components/adminPanel/Users";
 import EditUser from "./components/adminPanel/EditUser";
 import UnderConst from "./pages/UnderConst.jsx";
-import ProductView from "./components/ProductView";
+import ProductView from "./pages/ProductView";
+import { loadingFail, loadingFinish, loadingStart } from "./redux/loadSlicer";
+import { fetchCartItems } from "./redux/cartBoxSlicer";
+import axios from "axios";
 
 function App() {
+  const dispatch = useDispatch();
   const { logging } = useSelector((store) => store.currentUser);
   const { loading } = useSelector((store) => store.loadStatus);
 
@@ -51,6 +55,29 @@ function App() {
   }, [token]);
 
   console.log(token, currentUser);
+
+  useEffect(() => {
+    const fetchUsersCartBox = async () => {
+      try {
+        dispatch(loadingStart());
+        const { data } = await axios.get(
+          `https://my-ecom-back.herokuapp.com/api/v1/carts/user/get_all/${currentUser.id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(data);
+        dispatch(fetchCartItems(data));
+        dispatch(loadingFinish());
+      } catch (error) {
+        dispatch(loadingFail());
+        toast.error(error.response.data?.message);
+      }
+    };
+    token && fetchUsersCartBox();
+  }, [token, dispatch, currentUser.id]);
 
   return (
     <HashRouter>
