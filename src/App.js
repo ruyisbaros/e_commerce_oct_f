@@ -103,7 +103,7 @@ function App() {
                   currentUser.roles.map((r) => r.roleName).includes("Admin") ? (
                     <AdminHome />
                   ) : (
-                    <ClientHome token={token} />
+                    <ClientHome token={token} currentUser={currentUser} />
                   )
                 ) : (
                   <ClientHome token={token} />

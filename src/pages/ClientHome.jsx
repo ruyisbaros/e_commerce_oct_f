@@ -10,7 +10,7 @@ import image5 from "../assets/b5.jpg";
 import HomeSingleProduct from "../components/HomeSingleProduct";
 import { loadingFail, loadingFinish, loadingStart } from "../redux/loadSlicer";
 
-const ClientHome = ({ token }) => {
+const ClientHome = ({ token, currentUser }) => {
   const dispatch = useDispatch();
   const [products, setProducts] = useState([]);
   const [currentImg, setCurrentImg] = useState(0);
@@ -54,7 +54,12 @@ const ClientHome = ({ token }) => {
       </div>
       <div className="client_home_products">
         {products?.map((p) => (
-          <HomeSingleProduct key={p.id} token={token} {...p} />
+          <HomeSingleProduct
+            key={p.id}
+            token={token}
+            currentUser={currentUser}
+            {...p}
+          />
         ))}
       </div>
     </div>

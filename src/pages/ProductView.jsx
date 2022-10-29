@@ -59,8 +59,8 @@ const ProductView = ({ token }) => {
         `https://my-ecom-back.herokuapp.com/api/v1/products/user/update/rate/${id}?rate=${
           i + 1
         }`,
-        null /* ,
-        { headers: { Authorization: `Bearer ${token}` } } */
+        null,
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       console.log(data);
       dispatch(loadingFinish());
@@ -186,20 +186,12 @@ const ProductView = ({ token }) => {
               onChange={(e) => setBasketQuantity(e.target.value)}
             />
             <div className="action_buttons">
-              {token ? (
-                <Link to="/developing" className="link_class">
-                  <button className="add_basket">Add to Basket</button>
-                </Link>
-              ) : (
-                navigate("/login")
-              )}
-              {token ? (
-                <Link to="/developing" className="link_class">
-                  <button className="buy_now">Buy Now</button>
-                </Link>
-              ) : (
-                navigate("/login")
-              )}
+              <Link to="/developing" className="link_class">
+                <button className="add_basket">Add to Basket</button>
+              </Link>
+              <Link to="/developing" className="link_class">
+                <button className="buy_now">Buy Now</button>
+              </Link>
             </div>
           </div>
         </div>

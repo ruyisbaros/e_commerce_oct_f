@@ -1,7 +1,10 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import { BiEuro } from "react-icons/bi";
 import { BsCart4 } from "react-icons/bs";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const HomeSingleProduct = ({
   id,
@@ -16,6 +19,36 @@ const HomeSingleProduct = ({
   token,
 }) => {
   //console.log(productImages);
+  const { cartBox } = useSelector((store) => store.cartBox);
+  const [addedCart, setAddedCart] = useState(false);
+  const [cartItem, setCartItem] = useState({
+    quantity: 1,
+    userId: currentUser.id,
+    productId: id,
+  });
+
+  const { quantity, userId, productId } = cartItem;
+
+  const addItemTocart = async () => {
+    if (token) {
+      try {
+        const { data } = await axios.post(
+          "https://my-ecom-back.herokuapp.com/api/v1/carts/user/create",
+          { quantity, userId, productId },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(data);
+      } catch (error) {
+        toast.error(error.response.data.message);
+      }
+    } else {
+      toast.error("You should logged in");
+    }
+  };
   return (
     <div className="home_single_product">
       <div className="img_box">
@@ -32,7 +65,7 @@ const HomeSingleProduct = ({
         </span>
       </p>
       <Link to={`/add_cart/${id}`}>
-        <div className="go_basket">
+        <div className="go_basket" onClick={addItemTocart}>
           <span>
             <BsCart4 />
           </span>

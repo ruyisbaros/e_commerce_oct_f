@@ -5,8 +5,11 @@ import { GrLocation } from "react-icons/gr";
 import { FiShoppingCart } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const Header = ({ token }) => {
+  const { cartBox } = useSelector((store) => store.cartBox);
+  console.log(cartBox);
   const navigate = useNavigate();
   const [isNavSeen, setIsNavSeen] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -56,7 +59,7 @@ const Header = ({ token }) => {
               <Link to="/card" className="link_class">
                 <FiShoppingCart size={30} />
               </Link>
-              <span>2</span>
+              <span>{cartBox.length}</span>
             </>
           )}
         </div>
