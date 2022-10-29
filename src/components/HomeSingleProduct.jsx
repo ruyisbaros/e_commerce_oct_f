@@ -1,10 +1,13 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { BiEuro } from "react-icons/bi";
-import { BsCart4 } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import { BsCart4, BsForwardFill } from "react-icons/bs";
+
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { addItemToBasket } from "../redux/cartBoxSlicer";
+import { loadingFinish, loadingStart } from "../redux/loadSlicer";
 
 const HomeSingleProduct = ({
   id,
@@ -17,10 +20,14 @@ const HomeSingleProduct = ({
   productImages,
   currentUser,
   token,
+  setAddedBanner,
+  displayRef,
 }) => {
   //console.log(productImages);
+  const dispatch = useDispatch();
+
   const { cartBox } = useSelector((store) => store.cartBox);
-  const [addedCart, setAddedCart] = useState(false);
+
   const [cartItem, setCartItem] = useState({
     quantity: 1,
     userId: currentUser.id,
@@ -32,6 +39,7 @@ const HomeSingleProduct = ({
   const addItemTocart = async () => {
     if (token) {
       try {
+        dispatch(loadingStart());
         const { data } = await axios.post(
           "https://my-ecom-back.herokuapp.com/api/v1/carts/user/create",
           { quantity, userId, productId },
@@ -42,8 +50,16 @@ const HomeSingleProduct = ({
           }
         );
         console.log(data);
+        dispatch(addItemToBasket(data));
+        dispatch(loadingFinish());
+        setAddedBanner(true);
+        displayRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
       } catch (error) {
         toast.error(error.response.data.message);
+        dispatch(loadingFinish());
       }
     } else {
       toast.error("You should logged in");
@@ -64,14 +80,23 @@ const HomeSingleProduct = ({
           <BiEuro />
         </span>
       </p>
-      <Link to={`/add_cart/${id}`}>
-        <div className="go_basket" onClick={addItemTocart}>
+      {cartBox?.find((item) => item.product.id === id) ? (
+        <Link to="/cart_box">
+          <div className="go_basket">
+            <span>
+              <BsForwardFill />
+            </span>
+            Go to Cart
+          </div>
+        </Link>
+      ) : (
+        <div className="add_basket" onClick={addItemTocart}>
           <span>
             <BsCart4 />
           </span>
           Add to Cart
         </div>
-      </Link>
+      )}
     </div>
   );
 };

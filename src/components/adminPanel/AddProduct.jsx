@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import loadingImg from "../../assets/loading.gif";
+import { loadingFinish, loadingStart } from "../../redux/loadSlicer";
 
 const AddProduct = ({ token }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isCreated, setIsCreated] = useState(false);
   const [categories, setCategories] = useState([]);
   const [newProduct, setNewProduct] = useState({
@@ -129,6 +132,7 @@ const AddProduct = ({ token }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      dispatch(loadingStart());
       const { data } = await axios.post(
         "https://my-ecom-back.herokuapp.com/api/v1/products/admin/create",
         {
@@ -137,9 +141,11 @@ const AddProduct = ({ token }) => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       console.log(data);
+      dispatch(loadingFinish());
       navigate("/products");
     } catch (error) {
       toast.error(error.response.data.message);
+      dispatch(loadingFinish());
     }
   };
 

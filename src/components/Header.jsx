@@ -56,7 +56,7 @@ const Header = ({ token }) => {
         <div className="shop-card">
           {token && (
             <>
-              <Link to="/card" className="link_class">
+              <Link to="/cart_box" className="link_class">
                 <FiShoppingCart size={30} />
               </Link>
               <span>{cartBox.length}</span>

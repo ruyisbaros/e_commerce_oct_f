@@ -43,6 +43,20 @@
   padding-left: 2rem;
   cursor: pointer;
 }
+.home_single_product .add_basket {
+  position: absolute;
+  background-color: blue;
+  color: #fff;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-left: 2rem;
+  cursor: pointer;
+}
 
 @media (max-width: 1280px) {
   .home_single_product {

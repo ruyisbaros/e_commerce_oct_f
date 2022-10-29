@@ -113,7 +113,10 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/forgot_password" element={<ForgotPassword />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/card" element={<ShopCard />} />
+            <Route
+              path="/cart_box"
+              element={<ShopCard token={token} currentUser={currentUser} />}
+            />
             <Route
               path="/admin/categories"
               element={<Categories token={token} />}
@@ -148,7 +151,7 @@ function App() {
               path="/admin/update_user/:id"
               element={<EditUser token={token} />}
             />
-            <Route path="/add_cart/:id" element={<UnderConst />} />
+            {/* <Route path="/add_cart/:id" element={<UnderConst />} /> */}
             <Route path="/developing" element={<UnderConst />} />
 
             <Route path="*" element={<NotFound />} />

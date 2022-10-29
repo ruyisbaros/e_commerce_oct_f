@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import image1 from "../assets/b1.jpg";
@@ -9,9 +9,12 @@ import image4 from "../assets/b4.jpg";
 import image5 from "../assets/b5.jpg";
 import HomeSingleProduct from "../components/HomeSingleProduct";
 import { loadingFail, loadingFinish, loadingStart } from "../redux/loadSlicer";
+import { GrClose } from "react-icons/gr";
 
 const ClientHome = ({ token, currentUser }) => {
   const dispatch = useDispatch();
+  const displayRef = useRef();
+  const [addedBanner, setAddedBanner] = useState(false);
   const [products, setProducts] = useState([]);
   const [currentImg, setCurrentImg] = useState(0);
   const banner_images = [image1, image2, image3, image4, image5];
@@ -52,15 +55,27 @@ const ClientHome = ({ token, currentUser }) => {
           ))}
         </ul>
       </div>
-      <div className="client_home_products">
+      <div className="client_home_products" ref={displayRef}>
         {products?.map((p) => (
           <HomeSingleProduct
             key={p.id}
             token={token}
             currentUser={currentUser}
             {...p}
+            setAddedBanner={setAddedBanner}
+            displayRef={displayRef}
           />
         ))}
+        {addedBanner && (
+          <div className="item_added">
+            <div className="item_added_sorround">
+              <span onClick={() => setAddedBanner(false)}>
+                <GrClose />
+              </span>
+              <p>Item Has been addded</p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
