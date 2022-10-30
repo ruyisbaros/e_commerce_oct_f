@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { loadingFail, loadingFinish, loadingStart } from "../redux/loadSlicer";
@@ -8,17 +8,29 @@ import Rating from "../components/Rating";
 import Rate from "../components/Rate";
 import { BiEuro } from "react-icons/bi";
 import { AiOutlineDown } from "react-icons/ai";
+import { BsCart4, BsForwardFill } from "react-icons/bs";
 import image2 from "../assets/b2.jpg";
+import { addItemToBasket } from "../redux/cartBoxSlicer";
 
-const ProductView = ({ token }) => {
+const ProductView = ({ token, currentUser }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { id } = useParams();
   console.log(id);
+  const { cartBox } = useSelector((store) => store.cartBox);
+  const navigate = useNavigate();
+
   const [singleProduct, setSingleProduct] = useState(null);
   const [bigImageIndex, setBigImageIndex] = useState(null);
   const [basketQuantity, setBasketQuantity] = useState(0);
   const [ratingBoxSeen, setRatingBoxSeen] = useState(false);
+  const [addedBanner, setAddedBanner] = useState(false);
+  const [cartItem, setCartItem] = useState({
+    quantity: 1,
+    userId: currentUser?.id,
+    productId: id && id,
+  });
+
+  const { quantity, userId, productId } = cartItem;
 
   useEffect(() => {
     setBigImageIndex(0);
@@ -38,7 +50,7 @@ const ProductView = ({ token }) => {
         dispatch(loadingFail());
       }
     };
-    fetchProduct();
+    id && fetchProduct();
   }, [id, dispatch]);
 
   console.log(singleProduct);
@@ -69,6 +81,32 @@ const ProductView = ({ token }) => {
     } catch (error) {
       toast.error(error.response.data.message);
       dispatch(loadingFinish());
+    }
+  };
+
+  const addItemTocart = async () => {
+    if (token) {
+      try {
+        dispatch(loadingStart());
+        const { data } = await axios.post(
+          "https://my-ecom-back.herokuapp.com/api/v1/carts/user/create",
+          { quantity, userId, productId },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(data);
+        dispatch(addItemToBasket(data));
+        dispatch(loadingFinish());
+        setAddedBanner(true);
+      } catch (error) {
+        toast.error(error.response.data.message);
+        dispatch(loadingFinish());
+      }
+    } else {
+      toast.error("You should logged in");
     }
   };
 
@@ -186,10 +224,21 @@ const ProductView = ({ token }) => {
               onChange={(e) => setBasketQuantity(e.target.value)}
             />
             <div className="action_buttons">
-              <Link to="/developing" className="link_class">
-                <button className="add_basket">Add to Basket</button>
-              </Link>
-              <Link to="/developing" className="link_class">
+              {cartBox?.find(
+                (item) => item.product.id === singleProduct?.id
+              ) ? (
+                <Link to="/cart_box" className="link_class">
+                  <button className="add_basket">Go To Cart</button>
+                </Link>
+              ) : (
+                <button className="add_basket" onClick={addItemTocart}>
+                  <span style={{ marginRight: "10px" }}>
+                    <BsCart4 />
+                  </span>
+                  Add to Cart
+                </button>
+              )}
+              <Link to="/check_out" className="link_class">
                 <button className="buy_now">Buy Now</button>
               </Link>
             </div>

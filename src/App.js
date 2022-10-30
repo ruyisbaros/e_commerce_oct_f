@@ -141,7 +141,7 @@ function App() {
             />
             <Route
               path="/product/view/:id"
-              element={<ProductView token={token} />}
+              element={<ProductView currentUser={currentUser} token={token} />}
             />
             <Route
               path="/admin/products/update/:id"
