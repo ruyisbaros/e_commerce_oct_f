@@ -105,6 +105,9 @@
     justify-content: center;
     gap: 1rem;
   }
+  .item_added .item_added_sorround {
+    width: 50%;
+  }
 }
 @media (max-width: 800px) {
   .client_home_banner ul {

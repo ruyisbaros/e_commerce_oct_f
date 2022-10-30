@@ -36,6 +36,7 @@ import ProductView from "./pages/ProductView";
 import { loadingFail, loadingFinish, loadingStart } from "./redux/loadSlicer";
 import { fetchCartItems } from "./redux/cartBoxSlicer";
 import axios from "axios";
+import CheckOut from "./pages/CheckOut";
 
 function App() {
   const dispatch = useDispatch();
@@ -116,6 +117,10 @@ function App() {
             <Route
               path="/cart_box"
               element={<ShopCard token={token} currentUser={currentUser} />}
+            />
+            <Route
+              path="/check_out"
+              element={<CheckOut token={token} currentUser={currentUser} />}
             />
             <Route
               path="/admin/categories"

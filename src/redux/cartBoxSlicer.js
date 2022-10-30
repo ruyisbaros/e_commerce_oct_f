@@ -15,9 +15,7 @@ const cartBoxSlicer = createSlice({
       state.cartBox = [action.payload, ...state.cartBox];
     },
     removeItemFromBasket: (state, action) => {
-      state.cartBox = state.cartBox.filter(
-        (crt) => crt.id !== action.payload.id
-      );
+      state.cartBox = state.cartBox.filter((crt) => crt.id !== action.payload);
     },
   },
 });

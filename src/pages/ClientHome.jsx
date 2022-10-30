@@ -70,7 +70,7 @@ const ClientHome = ({ token, currentUser }) => {
           <div className="item_added">
             <div className="item_added_sorround">
               <span onClick={() => setAddedBanner(false)}>
-                <GrClose />
+                <GrClose color="crimson" />
               </span>
               <p>Item Has been addded</p>
             </div>

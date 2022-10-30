@@ -30,7 +30,7 @@ const HomeSingleProduct = ({
 
   const [cartItem, setCartItem] = useState({
     quantity: 1,
-    userId: currentUser.id,
+    userId: currentUser?.id,
     productId: id,
   });
 
