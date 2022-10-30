@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ShopCartItem from "../components/ShopCartItem";
 import { BiEuro } from "react-icons/bi";
+import { Link } from "react-router-dom";
+import { getTotalValue } from "../redux/cartBoxSlicer";
 
 const ShopCard = ({ token, currentUser }) => {
+  const dispatch = useDispatch();
   const { cartBox } = useSelector((store) => store.cartBox);
   const [total, setTotal] = useState(0);
 
@@ -11,7 +14,8 @@ const ShopCard = ({ token, currentUser }) => {
 
   useEffect(() => {
     setTotal(cartBox.reduce((a, b) => a + b.product.price * b.quantity, 0));
-  }, [cartBox]);
+    dispatch(getTotalValue(total));
+  }, [cartBox, dispatch, total]);
 
   return (
     <div className="shop_cart_main">
@@ -58,7 +62,11 @@ const ShopCard = ({ token, currentUser }) => {
                   <BiEuro /> 0.0
                 </p>
               </div>
-              <button className="shop_cart-right-checkout">Checkout</button>
+              <button className="shop_cart-right-checkout">
+                <Link to="/check_out" className="link_class">
+                  Checkout
+                </Link>
+              </button>
             </div>
             <div className="shop_cart-right-promotions">
               <p className="promotions">Promotions:</p>

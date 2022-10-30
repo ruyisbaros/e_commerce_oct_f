@@ -207,24 +207,37 @@
   .shop_cart-right {
     flex: 1;
   }
+  .shop_cart_items {
+    height: 350px;
+  }
   .shop_cart_items-remove {
     position: absolute;
-    top: 0;
-    right: -25px;
+    top: 5px;
+    right: 0px;
 
-    padding: 7px 10px;
+    padding: 4px;
   }
 }
 
 @media (max-width: 500px) {
+  .shop_cart_main-title {
+    font-size: 20px;
+  }
+  .shop_cart_main {
+    width: 110%;
+  }
   .shop_cart-sorround {
     flex-direction: column;
   }
   .shop_cart_items-remove {
     position: absolute;
-    top: 0;
-    right: -45px;
+    top: 5px;
+    right: 0px;
 
     padding: 6px;
+  }
+  .shop_cart-right {
+    margin-top: 1rem;
+    width: 90%;
   }
 }

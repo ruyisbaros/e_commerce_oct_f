@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   cartBox: [],
+  totalValue: 0,
 };
 
 const cartBoxSlicer = createSlice({
@@ -17,10 +18,17 @@ const cartBoxSlicer = createSlice({
     removeItemFromBasket: (state, action) => {
       state.cartBox = state.cartBox.filter((crt) => crt.id !== action.payload);
     },
+    getTotalValue: (state, action) => {
+      state.totalValue = action.payload;
+    },
   },
 });
 
-export const { fetchCartItems, addItemToBasket, removeItemFromBasket } =
-  cartBoxSlicer.actions;
+export const {
+  fetchCartItems,
+  addItemToBasket,
+  removeItemFromBasket,
+  getTotalValue,
+} = cartBoxSlicer.actions;
 
 export default cartBoxSlicer.reducer;
