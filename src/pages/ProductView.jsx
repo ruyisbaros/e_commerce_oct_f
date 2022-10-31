@@ -238,7 +238,7 @@ const ProductView = ({ token, currentUser }) => {
                   Add to Cart
                 </button>
               )}
-              <Link to="/check_out" className="link_class">
+              <Link to={`/check_out_single/${id}`} className="link_class">
                 <button className="buy_now">Buy Now</button>
               </Link>
             </div>
